@@ -21,11 +21,11 @@ import java.util.logging.Logger
 
 @Plugin(
     id = "basalt",
-    name = "AlchemisVelocity",
+    name = "Basalt",
     version = "1.0",
     authors = ["98ping", "AndyReckt", "Ian Rich"],
 )
-class BasaltVelocity @Inject constructor(val server: ProxyServer, val logger: Logger, @DataDirectory val dataDirectory: Path) {
+class BasaltVelocityPlugin @Inject constructor(val server: ProxyServer, val logger: Logger, @DataDirectory val dataDirectory: Path) {
 
     val config = YamlFile(dataDirectory.resolve("config.yml").toFile())
 
@@ -70,7 +70,7 @@ class BasaltVelocity @Inject constructor(val server: ProxyServer, val logger: Lo
 
     companion object {
         @JvmStatic
-        lateinit var instance: BasaltVelocity
+        lateinit var instance: BasaltVelocityPlugin
 
         private var serializer: LegacyComponentSerializer =
             LegacyComponentSerializer.builder().character('&').hexColors().build()

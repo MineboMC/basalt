@@ -33,27 +33,8 @@ dependencies {
     compileOnly 'net.md-5:bungeecord-api:1.19-R0.1-SNAPSHOT'
     compileOnly 'com.mojang:authlib:1.5.21'
 
+    //
+
     //local files
     compileOnly fileTree(include: ['LunarClientAPI.jar', 'API-1.3.2.jar'], dir: 'lib')
-}
-
-publishing {
-    publications {
-        maven(MavenPublication) {
-            groupId = "net.minebo"
-            artifactId = "basalt"
-            version = "2.12"
-            from components.java
-        }
-    }
-}
-
-
-
-shadowJar {
-    relocate 'redis.clients', 'net.minebo.basalt.relocated.redis'
-    relocate 'kotlin', 'net.minebo.basalt.relocated.kotlin'
-    relocate 'com.mongodb', 'net.minebo.basalt.relocated.mongo'
-    relocate 'org.bson', 'net.minebo.basalt.relocated.bson'
-    relocate 'net.kyori', 'net.minebo.basalt.relocated.adventure'
 }

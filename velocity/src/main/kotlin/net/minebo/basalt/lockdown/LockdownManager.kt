@@ -1,12 +1,12 @@
 package net.minebo.basalt.lockdown
 
 import com.velocitypowered.api.proxy.Player
-import net.minebo.basalt.BasaltVelocity
+import net.minebo.basalt.BasaltVelocityPlugin
 
 
 object LockdownManager {
     fun serverIsOnLockdown() : Boolean {
-        return BasaltVelocity.instance.config.getBoolean("lockdown")
+        return BasaltVelocityPlugin.instance.config.getBoolean("lockdown")
     }
 
     fun hasClearance(player: Player) : Boolean {

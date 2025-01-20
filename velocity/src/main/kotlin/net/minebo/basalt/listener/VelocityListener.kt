@@ -4,23 +4,20 @@ import com.velocitypowered.api.event.Continuation
 import com.velocitypowered.api.event.PostOrder
 import com.velocitypowered.api.event.Subscribe
 import com.velocitypowered.api.event.connection.DisconnectEvent
-import com.velocitypowered.api.event.connection.LoginEvent
 import com.velocitypowered.api.event.connection.PostLoginEvent
 import com.velocitypowered.api.event.permission.PermissionsSetupEvent
 import com.velocitypowered.api.event.player.ServerConnectedEvent
 import com.velocitypowered.api.proxy.Player
-import net.minebo.basalt.BasaltVelocity
+import net.minebo.basalt.BasaltVelocityPlugin
 import net.minebo.basalt.lockdown.LockdownManager
-import net.minebo.basalt.models.profile.GameProfile
 import net.minebo.basalt.packets.StaffMessagePacket
 import net.minebo.basalt.permission.BasaltPermissionProvider
 import net.minebo.basalt.service.expirable.RankGrantService
 import net.minebo.basalt.service.profiles.ProfileGameService
-import org.checkerframework.checker.units.qual.A
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.TimeUnit
 
-class VelocityListener(private val plugin: BasaltVelocity) {
+class VelocityListener(private val plugin: BasaltVelocityPlugin) {
 
     @Subscribe
     fun onSwitch(event: ServerConnectedEvent, continuation: Continuation) {
@@ -118,7 +115,7 @@ class VelocityListener(private val plugin: BasaltVelocity) {
                 if (LockdownManager.hasClearance(event.player)) {
                     StaffMessagePacket("&b✓ &a" + event.player.username + " has clearance for " + event.player.currentServer.get().serverInfo.name).action()
                 } else {
-                    event.player.disconnect(BasaltVelocity.color("&cServer is on lockdown and you do not have clearance!"))
+                    event.player.disconnect(BasaltVelocityPlugin.color("&cServer is on lockdown and you do not have clearance!"))
                 }
             }
             continuation.resume()

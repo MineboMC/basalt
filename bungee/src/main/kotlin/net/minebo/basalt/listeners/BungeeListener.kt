@@ -1,11 +1,8 @@
 package net.minebo.basalt.listeners
 
-import com.google.errorprone.annotations.concurrent.LockMethod
-import net.minebo.basalt.Basalt
-import net.minebo.basalt.BasaltBungee
+import net.minebo.basalt.BasaltBungeePlugin
 import net.minebo.basalt.lockdown.LockdownManager
 import net.minebo.basalt.packets.StaffMessagePacket
-import net.minebo.basalt.redis.BungeeRedisSender
 import net.minebo.basalt.service.expirable.RankGrantService
 import net.minebo.basalt.service.profiles.ProfileGameService
 import net.md_5.bungee.api.ChatColor
@@ -16,7 +13,6 @@ import net.md_5.bungee.api.event.ServerConnectEvent
 import net.md_5.bungee.api.event.ServerSwitchEvent
 import net.md_5.bungee.api.plugin.Listener
 import net.md_5.bungee.event.EventHandler
-import net.md_5.bungee.protocol.packet.Chat
 import java.util.concurrent.TimeUnit
 
 //no packets actually need to send through redis because bungee has all players already stored
@@ -28,7 +24,7 @@ class BungeeListener : Listener {
         val player = event.player.uniqueId
 
         val playerRank = ProfileGameService.byId(player)?.getHighestGlobalRank() ?: return
-        BasaltBungee.instance.proxy.scheduler.schedule(BasaltBungee.instance, {
+        BasaltBungeePlugin.instance.proxy.scheduler.schedule(BasaltBungeePlugin.instance, {
             if (playerRank.staff && event.from != null) {
                 StaffMessagePacket("&b[S] &r" + playerRank.color + event.player.name + " &3joined &b" + event.player.server.info.name + " &3from &b" + event.from.name).action()
             }
@@ -55,7 +51,7 @@ class BungeeListener : Listener {
 
         val playerRank = ProfileGameService.byId(player)?.getHighestGlobalRank() ?: return
 
-        BasaltBungee.instance.proxy.scheduler.schedule(BasaltBungee.instance, {
+        BasaltBungeePlugin.instance.proxy.scheduler.schedule(BasaltBungeePlugin.instance, {
             if (playerRank.staff) {
                 StaffMessagePacket("&b[S] &r" + playerRank.color + event.connection.name + " &3connected to the network").action()
             }
@@ -76,7 +72,7 @@ class BungeeListener : Listener {
 
         val playerRank = profile.getHighestGlobalRank()
 
-        BasaltBungee.instance.proxy.scheduler.schedule(BasaltBungee.instance, {
+        BasaltBungeePlugin.instance.proxy.scheduler.schedule(BasaltBungeePlugin.instance, {
             if (playerRank.staff) {
                 StaffMessagePacket("&b[S] &r" + playerRank.color + player.name + " &3left the network").action()
             }
@@ -85,7 +81,7 @@ class BungeeListener : Listener {
 
     @EventHandler
     fun checkClearance(event: ServerConnectEvent) {
-        BasaltBungee.instance.proxy.scheduler.schedule(BasaltBungee.instance, {
+        BasaltBungeePlugin.instance.proxy.scheduler.schedule(BasaltBungeePlugin.instance, {
             if (LockdownManager.serverIsOnLockdown()) {
                 if (LockdownManager.hasClearance(event.player)) {
                     StaffMessagePacket("&b✓ &a" + event.player.name + " has clearance for " + event.player.server.info.name).action()

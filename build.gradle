@@ -7,8 +7,8 @@ plugins {
 }
 
 allprojects {
-    group 'net.minebo'
-    version '1.0-SNAPSHOT'
+    group = 'net.minebo.basalt'
+    version = '1.0-SNAPSHOT'
 
     repositories {
         mavenCentral()
@@ -21,7 +21,6 @@ allprojects {
         maven { url 'https://papermc.io/repo/repository/maven-public/' }
         maven { url 'https://hub.spigotmc.org/nexus/content/groups/public/' }
         maven { url "https://repo.glaremasters.me/repository/public/" }
-        maven { url "https://maven.carbonmc.net/public/" }
     }
 }
 
@@ -35,17 +34,17 @@ subprojects {
     dependencies {
         implementation "org.jetbrains.kotlin:kotlin-stdlib"
 
-        //lombok
+        // Lombok
         compileOnly 'org.projectlombok:lombok:1.18.22'
         kapt 'org.projectlombok:lombok:1.18.22'
 
-        //apache
+        // Apache
         implementation 'org.apache.maven:maven-artifact:3.0.3'
 
-        //honey
+        // Honey
         implementation files('../libraries/Honey+1.0.0.jar')
 
-        //placeholderapi
+        // PlaceholderAPI
         implementation files('../libraries/PlaceholderAPI-2.11.6.jar')
     }
 
@@ -53,8 +52,38 @@ subprojects {
         toolchain.languageVersion.set(JavaLanguageVersion.of(11))
     }
 
-    compileKotlin {
+    tasks.named('compileKotlin') {
         kotlinOptions.javaParameters = true
         kotlinOptions.jvmTarget = "11"
+    }
+
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                from components.java
+            }
+        }
+    }
+}
+
+tasks.named('shadowJar') {
+    archiveClassifier.set('') // Remove the 'all' classifier
+    mergeServiceFiles()
+
+    // Include outputs from all subprojects
+    subprojects.each { subproject ->
+        from(subproject.sourceSets.main.output)
+    }
+}
+
+artifacts {
+    archives tasks.named('shadowJar').get()
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact tasks.named('shadowJar').get()
+        }
     }
 }

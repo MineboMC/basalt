@@ -10,10 +10,10 @@ import net.md_5.bungee.config.ConfigurationProvider
 import net.md_5.bungee.config.YamlConfiguration
 import java.io.File
 
-class BasaltBungee : Plugin() {
+class BasaltBungeePlugin : Plugin() {
 
     companion object {
-        lateinit var instance: BasaltBungee
+        lateinit var instance: BasaltBungeePlugin
     }
 
     val config = ConfigurationProvider.getProvider(YamlConfiguration::class.java)
