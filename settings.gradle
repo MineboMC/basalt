@@ -1,0 +1,8 @@
+rootProject.name = 'Basalt'
+include 'commons'
+include 'spigot'
+include 'bungee'
+include 'velocity'
+include 'website'
+include 'discord'
+

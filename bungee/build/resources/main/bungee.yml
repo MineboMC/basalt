@@ -1,0 +1,4 @@
+name: BasaltBungee
+version: "1.2"
+main: net.minebo.basalt.BasaltBungee
+author: Ian Rich
