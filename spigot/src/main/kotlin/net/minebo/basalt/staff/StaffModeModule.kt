@@ -4,7 +4,6 @@ import co.aikar.commands.BaseCommand
 import net.minebo.basalt.BasaltSpigotPlugin
 import net.minebo.basalt.module.PluginModule
 import net.minebo.basalt.staff.commands.InventoryViewCommand
-import net.minebo.basalt.staff.mode.action.StaffModeActionBarHandler
 import net.minebo.basalt.staff.mode.commands.FreezeCommand
 import net.minebo.basalt.staff.mode.commands.StaffCommands
 import net.minebo.basalt.staff.mode.commands.VanishCommands
@@ -19,10 +18,7 @@ import net.minebo.basalt.staff.settings.edit.EditModModeCommand
  */
 object StaffModeModule : PluginModule
 {
-    override fun onLoad()
-    {
-        StaffModeActionBarHandler().runTaskTimer(BasaltSpigotPlugin.instance, 20L, 20L)
-    }
+    override fun onLoad() {}
 
     override fun getCommands(): MutableList<BaseCommand>
     {

@@ -19,7 +19,6 @@ import net.minebo.basalt.commands.coins.CoinsCommand
 import net.minebo.basalt.commands.filter.FilterCommands
 import net.minebo.basalt.commands.metrics.MetricCommand
 import net.minebo.basalt.commands.notes.PlayerNotesCommands
-import net.minebo.basalt.commands.party.PartyCommands
 import net.minebo.basalt.commands.rank.GenericRankCommands
 import net.minebo.basalt.commands.sessions.SessionCommands
 import net.minebo.basalt.commands.sync.DiscordSyncCommands
@@ -54,6 +53,7 @@ import net.minebo.basalt.servers.commands.BroadcastCommand
 import net.minebo.basalt.themes.commands.ThemeSelectCommand
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
+import org.bukkit.enchantments.Enchantment
 import java.util.*
 
 object ACFCommandController
@@ -73,6 +73,9 @@ object ACFCommandController
             this.commandContexts.registerContext(AsyncGameProfile::class.java, AsyncProfileResolver())
             this.commandContexts.registerContext(RankScope::class.java, RankScopeResolver())
 
+            this.commandCompletions.registerCompletion("enchantments") {
+                return@registerCompletion Enchantment.values().map { it.name }.toList()
+            }
 
             this.commandCompletions.registerCompletion("gameprofile") {
                 return@registerCompletion BasaltSpigotPlugin.instance.server.onlinePlayers.map { it.name }.toList()
@@ -179,11 +182,6 @@ object ACFCommandController
             registerCommand(MetricCommand())
 
             registerCommand(SessionCommands())
-
-            if (config.getBoolean("modules.parties"))
-            {
-                registerCommand(PartyCommands())
-            }
 
             registerCommand(LookupCommand())
         }

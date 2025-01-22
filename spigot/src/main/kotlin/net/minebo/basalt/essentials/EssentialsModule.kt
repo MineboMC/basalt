@@ -6,6 +6,7 @@ import net.minebo.basalt.essentials.commands.*
 import net.minebo.basalt.essentials.listener.EntityEditorListener
 import net.minebo.basalt.essentials.messages.MessageCommands
 import net.minebo.basalt.module.PluginModule
+import net.minebo.essentials.commands.EnchantCommand
 import org.bukkit.Bukkit
 
 object EssentialsModule : PluginModule
@@ -24,6 +25,8 @@ object EssentialsModule : PluginModule
         commands.add(RegenerativeCommands())
         commands.add(ClearInventoryCommand())
         commands.add(CraftCommand())
+
+        commands.add(EnchantCommand())
 
         commands.add(KillCommand())
         commands.add(RenameCommand())

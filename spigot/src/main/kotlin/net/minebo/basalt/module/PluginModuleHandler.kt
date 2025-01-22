@@ -25,10 +25,10 @@ object PluginModuleHandler
         ProfileModule,
         StaffModeModule,
         PunishmentModule,
+        EssentialsModule,
         PermissionModule,
         ServerModule,
         ChatModule,
-        EssentialsModule,
         LunarClientExtension,
         DisguiseModule
     )

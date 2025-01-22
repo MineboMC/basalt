@@ -210,11 +210,6 @@ class BasaltSpigotPlugin : JavaPlugin()
         (SyncTask()).runTaskTimer(this, 0L, 60L * 20L)
         MenuAutoUpdate().runTaskTimer(this, 20L, 20L)
 
-        if (config.getBoolean("modules.parties"))
-        {
-            //(DecayingPartyTask()).runTaskTimerAsynchronously(this, 0L, 40L)
-        }
-
         StatisticManager.loadStats()
 
         val vaultStart = System.currentTimeMillis()

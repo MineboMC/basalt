@@ -37,12 +37,12 @@ class FreezeCommand : BaseCommand()
         if (frozen)
         {
             target.removeMetadata("frozen", BasaltSpigotPlugin.instance)
-            target.sendMessage(Chat.format("&aYou have been unfrozen"))
+            target.sendMessage(Chat.format("&aYou have been unfrozen."))
             AsynchronousRedisSender.send(StaffGeneralMessagePacket("&b[S] &3[$server] $displayExec &3has unfrozen $displayTarget"))
         } else
         {
             target.setMetadata("frozen", FixedMetadataValue(BasaltSpigotPlugin.instance, true))
-            target.sendMessage(Chat.format("&cYou have been frozen"))
+            target.sendMessage(Chat.format("&cYou have been frozen."))
             AsynchronousRedisSender.send(StaffGeneralMessagePacket("&b[S] &3[$server] $displayExec &3has frozen $displayTarget"))
         }
 

@@ -40,16 +40,6 @@ class ModuleEditorMenu(val player: Player) : Menu(player)
         )
 
         buttons[12] = ModuleButton(
-            "modules.parties", "&b&lParties", Material.ARROW, mutableListOf(
-                " ",
-                Chat.format("&7This module controls the party function on"),
-                Chat.format("&7the server. These parties function similar to larger"),
-                Chat.format("&7servers in the way that you can invite to, kick from, and disband"),
-                Chat.format("&7your party.")
-            ), 0
-        )
-
-        buttons[13] = ModuleButton(
             "modules.prefixes", "&e&lPrefixes", Material.NAME_TAG, mutableListOf(
                 " ",
                 Chat.format("&7This module controls chat tags that"),
@@ -59,7 +49,7 @@ class ModuleEditorMenu(val player: Player) : Menu(player)
             ), 0
         )
 
-        buttons[14] = ModuleButton(
+        buttons[13] = ModuleButton(
             "modules.coins", "&2&lCoins", Material.EMERALD, mutableListOf(
                 " ",
                 Chat.format("&7This module controls the addition of"),
@@ -71,7 +61,7 @@ class ModuleEditorMenu(val player: Player) : Menu(player)
         )
 
 
-        buttons[15] = ModuleButton(
+        buttons[14] = ModuleButton(
             "modules.filters", "&9&lFilters", Material.HOPPER, mutableListOf(
                 " ",
                 Chat.format("&7This module controls in-game filters"),
@@ -82,7 +72,7 @@ class ModuleEditorMenu(val player: Player) : Menu(player)
             ), 0
         )
 
-        buttons[16] = ModuleButton(
+        buttons[15] = ModuleButton(
             "modules.queue", "&a&lQueue", Material.BLAZE_POWDER, mutableListOf(
                 " ",
                 Chat.format("&7This module controls the queue"),
@@ -92,7 +82,7 @@ class ModuleEditorMenu(val player: Player) : Menu(player)
             ), 0
         )
 
-        buttons[19] = ModuleButton(
+        buttons[16] = ModuleButton(
             "modules.chatcolors", "&3&lChatColors", Material.INK_SACK, mutableListOf(
                 " ",
                 Chat.format("&7This module controls custom chat colors"),
@@ -102,7 +92,7 @@ class ModuleEditorMenu(val player: Player) : Menu(player)
             ), 6
         )
 
-        buttons[20] = ModuleButton(
+        buttons[19] = ModuleButton(
             "modules.notes", "&5&lNotes", Material.BOOK, mutableListOf(
                 " ",
                 Chat.format("&7This module controls notes that can"),
@@ -112,7 +102,7 @@ class ModuleEditorMenu(val player: Player) : Menu(player)
             ), 0
         )
 
-        buttons[21] = ModuleButton(
+        buttons[20] = ModuleButton(
             "modules.staffmode", "&c&lStaffMode", Material.COMPASS, mutableListOf(
                 " ",
                 Chat.format("&7This module controls the staff mode"),
@@ -122,7 +112,7 @@ class ModuleEditorMenu(val player: Player) : Menu(player)
             ), 0
         )
 
-        buttons[22] = ModuleButton(
+        buttons[21] = ModuleButton(
             "modules.chat", "&4&lChat Moderation", Material.ANVIL, mutableListOf(
                 " ",
                 Chat.format("&7This module controls chat moderation"),
@@ -130,7 +120,7 @@ class ModuleEditorMenu(val player: Player) : Menu(player)
             ), 0
         )
 
-        buttons[23] = ModuleButton(
+        buttons[22] = ModuleButton(
             "modules.vouchers", "&7&lVouchers", Material.DIAMOND_CHESTPLATE, mutableListOf(
                 " ",
                 Chat.format("&7This module controls vouchers that users"),
@@ -139,16 +129,7 @@ class ModuleEditorMenu(val player: Player) : Menu(player)
             ), 0
         )
 
-        buttons[24] = ModuleButton(
-            "modules.essentials", "&b&lEssentials", Material.NETHER_STAR, mutableListOf(
-                " ",
-                Chat.format("&7This module controls essential commands"),
-                Chat.format("&7that are very useful for players and staff"),
-                Chat.format("&7when interacting with a server environment")
-            ), 0
-        )
-
-        buttons[25] = ModuleButton(
+        buttons[23] = ModuleButton(
             "modules.themeCommands", "&c&lThemes", Material.PAINTING, mutableListOf(
                 " ",
                 Chat.format("&7This module controls if the themes command"),
