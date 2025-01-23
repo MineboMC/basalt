@@ -38,6 +38,8 @@ object EssentialsModule : PluginModule
 
         commands.add(MessageCommands())
 
+        commands.add(PingCommand())
+
         return commands
     }
 

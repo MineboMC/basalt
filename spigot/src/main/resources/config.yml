@@ -96,7 +96,6 @@ grants:
 modules:
   ranks: true
   punishments: true
-  parties: true
   friends: true
   prefixes: true
   coins: true
@@ -108,7 +107,6 @@ modules:
   staffmode: true
   chat: true
   vouchers: true
-  essentials: true
   2fa: true
   themeCommands: true
   lunarClientAPI: true
