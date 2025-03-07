@@ -19,7 +19,7 @@ class BasaltExpansion : PlaceholderExpansion()
 
     override fun getAuthor(): String
     {
-        return "Matrix Studios"
+        return "ForestBukkit"
     }
 
     override fun getVersion(): String

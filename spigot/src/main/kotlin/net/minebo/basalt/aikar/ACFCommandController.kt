@@ -3,6 +3,7 @@ package net.minebo.basalt.aikar
 import co.aikar.commands.BukkitMessageFormatter
 import co.aikar.commands.MessageType
 import co.aikar.commands.PaperCommandManager
+import co.aikar.commands.bukkit.contexts.OnlinePlayer
 import net.minebo.basalt.BasaltSpigotPlugin
 import net.minebo.basalt.aikar.context.*
 import net.minebo.basalt.broadcasts.commands.AutoBroadcastCommands
@@ -72,6 +73,7 @@ object ACFCommandController
             this.commandContexts.registerContext(GrantScope::class.java, GrantScopeContextResolver())
             this.commandContexts.registerContext(AsyncGameProfile::class.java, AsyncProfileResolver())
             this.commandContexts.registerContext(RankScope::class.java, RankScopeResolver())
+            this.commandContexts.registerContext(OnlinePlayer::class.java, OnlinePlayerResolver())
 
             this.commandCompletions.registerCompletion("enchantments") {
                 return@registerCompletion Enchantment.values().map { it.name }.toList()

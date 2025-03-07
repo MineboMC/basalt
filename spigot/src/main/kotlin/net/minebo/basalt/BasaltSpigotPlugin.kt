@@ -244,7 +244,6 @@ class BasaltSpigotPlugin : JavaPlugin()
 
         if (config.getBoolean("discord.grants.enabled"))
         {
-
             WebhookService.createRankGrantClient(config.getString("discord.grants.webhookLink"))
         }
 
@@ -267,14 +266,7 @@ class BasaltSpigotPlugin : JavaPlugin()
         Chat.sendMultiConsoleMessage(
             arrayOf(
                 "&7&m--------------------------------",
-                "&a&lMatrix Studios Software &7- &f" + description.name + " &7[&a" + description.version + "&7]",
-                "",
-                "&fThis plugin has been distributed by Matrix Studios.",
-                "&fPlugin is not intended to be resold.",
-                "",
-                "&aWebsite: &fhttps://matrix-studios-software.github.io/",
-                "&aDiscord: &fhttps://discord.gg/UMnHT7QCSk",
-                "&aGitHub: &fhttps://github.com/Matrix-Studios-Software",
+                "&b&lBasalt Network Core &7- &3Forked from 98ping's alchemist!",
                 "&7&m--------------------------------",
             )
         )
