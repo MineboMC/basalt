@@ -1,8 +1,5 @@
 name: Basalt
 version: 2.13
 main: net.minebo.basalt.BasaltSpigotPlugin
-author: Ian Rich
-softdepend:
-  - PlaceholderAPI
-  - DisguiseAPI
-  - Vault
+authors: ["98ping", "Ian Rich"]
+softdepend: ["PlaceholderAPI", "DisguiseAPI", "Vault"]
