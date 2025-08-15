@@ -11,7 +11,7 @@ class NetworkMessagePacket(private val uuid: UUID, private val message: String) 
     {
         if (Bukkit.getPlayer(uuid) != null)
         {
-            Bukkit.getPlayer(uuid).sendMessage(message)
+            Bukkit.getPlayer(uuid)!!.sendMessage(message)
         }
     }
 }

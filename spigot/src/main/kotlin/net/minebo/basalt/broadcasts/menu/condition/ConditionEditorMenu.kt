@@ -21,13 +21,21 @@ import org.bukkit.entity.Player
  */
 class ConditionEditorMenu(val player: Player, private val broadcast: BroadcastMessage) : PaginatedMenu(18, player)
 {
+
+    fun getMaterial(player: Player, chatColor: String): Material {
+        // Assuming Chat.getDyeColor(...) returns org.bukkit.DyeColor
+        val dye = Chat.getDyeColor(chatColor)
+        // e.g. WHITE -> WHITE_WOOL, LIGHT_BLUE -> LIGHT_BLUE_WOOL, etc.
+        return Material.matchMaterial("${dye.name}_WOOL") ?: Material.WHITE_WOOL
+    }
+
     override fun getPagesButtons(player: Player): MutableMap<Int, Button>
     {
         val buttons = mutableMapOf<Int, Button>()
 
         broadcast.conditions.forEach { broadcastCondition ->
             buttons[buttons.size] = SimpleActionButton(
-                Material.WOOL,
+                getMaterial(player, broadcastCondition.logicGate.chatColor),
                 mutableListOf(
                     Chat.format("&7Condition: &f${broadcastCondition.condition}"),
                     Chat.format("&7Reference: &f${broadcastCondition.reference ?: "&cNone"}"),

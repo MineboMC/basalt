@@ -18,13 +18,13 @@ object SendLoadedProfileMessage : BukkitPostLoginTask
 
     override fun run(player: Player)
     {
-        Bukkit.getScheduler().runTaskLater(BasaltSpigotPlugin.instance, {
+        Bukkit.getScheduler().runTaskLater(BasaltSpigotPlugin.instance, Runnable {
             val config = BasaltSpigotPlugin.instance.config
 
             if (config.getBoolean("profiles.load.sendMessage"))
             {
                 val msg = config.getString("profiles.load.message")
-                player.sendMessage(Chat.format(msg))
+                player.sendMessage(Chat.format(msg!!))
 
             }
         }, 10L)

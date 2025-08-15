@@ -12,7 +12,7 @@ class PlayerKickPacket(private val uuid: UUID, private val reason: String) : Red
     {
         if (Bukkit.getPlayer(uuid) != null)
         {
-            Bukkit.getPlayer(uuid).kickPlayer(Chat.format(reason))
+            Bukkit.getPlayer(uuid)!!.kickPlayer(Chat.format(reason))
         }
     }
 }

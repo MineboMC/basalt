@@ -198,7 +198,7 @@ class CoinShopItemAttributeEditor(val player: Player, val item: CoinShopItem) : 
         }
 
         buttons[19] = SimpleActionButton(
-            Material.SIGN,
+            Material.OAK_SIGN,
             mutableListOf(
                 " ",
                 Chat.format("&7Change the commands that"),

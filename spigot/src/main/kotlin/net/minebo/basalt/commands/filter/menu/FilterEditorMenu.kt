@@ -67,7 +67,16 @@ class FilterEditorMenu(val player: Player) : PaginatedMenu(27, player)
     {
         override fun getMaterial(player: Player): Material
         {
-            return Material.WOOL
+            return if (filter.silent)
+            {
+                Material.GRAY_WOOL
+            } else if (filter.shouldPunish)
+            {
+                Material.RED_WOOL
+            } else
+            {
+                Material.LIME_WOOL
+            }
         }
 
         override fun getDescription(player: Player): MutableList<String>

@@ -19,7 +19,7 @@ class GeneralTagButton(var tag: Tag) : Button()
             return Material.NAME_TAG
         }
 
-        return Material.getMaterial(tag.displayItem!!.uppercase())
+        return Material.getMaterial(tag.displayItem!!.uppercase())!!
     }
 
     override fun getDescription(player: Player): MutableList<String>

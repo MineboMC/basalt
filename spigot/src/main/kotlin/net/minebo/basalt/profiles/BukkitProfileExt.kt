@@ -28,7 +28,7 @@ fun Player.getRankDisplay(): String
 
 fun Player.getCurrentRank(): Rank
 {
-    val profile = BasaltAPI.syncFindProfile(player.uniqueId) ?: return RankService.FALLBACK_RANK
+    val profile = BasaltAPI.syncFindProfile(player!!.uniqueId) ?: return RankService.FALLBACK_RANK
 
     return profile.getCurrentRank()
 }

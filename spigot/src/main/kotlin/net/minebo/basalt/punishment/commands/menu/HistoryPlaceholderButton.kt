@@ -1,5 +1,6 @@
 package net.minebo.basalt.punishment.commands.menu
 
+import net.minebo.basalt.api.BasaltAPI
 import net.minebo.basalt.models.profile.GameProfile
 import net.minebo.basalt.punishment.commands.menu.impl.GeneralPunishmentMenu
 import net.minebo.basalt.punishment.commands.menu.impl.filter.PunishmentFilter
@@ -17,7 +18,7 @@ class HistoryPlaceholderButton(var punishmentType: PunishmentType, var gameProfi
 
     override fun getMaterial(player: Player): Material
     {
-        return Material.WOOL
+        return Material.matchMaterial("${BasaltAPI.getWoolColor(ThemeLoader.defaultTheme.getHistoryPlaceholderData(player, gameProfile, punishmentType))}_WOOL") ?: Material.WHITE_WOOL
     }
 
     override fun getDescription(player: Player): MutableList<String>

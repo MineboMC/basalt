@@ -25,13 +25,13 @@ class SkullButton(
 
     override fun getButtonItem(player: Player): ItemStack?
     {
-        val itemstack = ItemStack(Material.SKULL_ITEM)
+        val itemstack = ItemStack(Material.PLAYER_HEAD)
 
         itemstack.durability = 3
 
         val itemMeta = itemstack.itemMeta as SkullMeta
 
-        itemMeta.displayName = Chat.format(name)
+        itemMeta.setDisplayName(Chat.format(name))
         itemMeta.lore = description
 
         return SkullUtil.applyCustomHead(itemstack, texture, "98pingIsCoolAsf", description, name)
@@ -39,7 +39,7 @@ class SkullButton(
 
     override fun getMaterial(player: Player): Material
     {
-        return Material.SKULL_ITEM
+        return Material.PLAYER_HEAD
     }
 
     override fun getDescription(player: Player): MutableList<String>

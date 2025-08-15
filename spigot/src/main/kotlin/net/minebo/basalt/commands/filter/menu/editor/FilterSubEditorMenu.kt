@@ -47,7 +47,7 @@ class FilterSubEditorMenu(val player: Player, val filter: Filter) : Menu(player)
         }
 
         buttons[11] = SimpleActionButton(
-            Material.REDSTONE_TORCH_ON,
+            Material.REDSTONE_TORCH,
             mutableListOf(
                 " ",
                 Chat.format("&eChange the punishment type"),
@@ -60,7 +60,7 @@ class FilterSubEditorMenu(val player: Player, val filter: Filter) : Menu(player)
         }
 
         buttons[12] = SimpleActionButton(
-            Material.WATCH,
+            Material.CLOCK,
             mutableListOf(
                 " ",
                 Chat.format("&eChange the duration of the punishment"),

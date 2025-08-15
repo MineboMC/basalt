@@ -62,7 +62,7 @@ class EditCommandsMenu(val player: Player, val item: CoinShopItem) : PaginatedMe
     {
         override fun getMaterial(player: Player): Material
         {
-            return Material.SIGN
+            return Material.OAK_SIGN
         }
 
         override fun getDescription(player: Player): MutableList<String>

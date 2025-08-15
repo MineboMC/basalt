@@ -16,7 +16,7 @@ class HistoryPlaceholderButton(val theme: Theme, val player: Player, val target:
 
     override fun getMaterial(player: Player): Material
     {
-        return Material.WOOL
+        return Material.matchMaterial("${theme.getHistoryPlaceholderData(player, target, type)}_WOOL") ?: Material.WHITE_WOOL
     }
 
     override fun getDescription(player: Player): MutableList<String>

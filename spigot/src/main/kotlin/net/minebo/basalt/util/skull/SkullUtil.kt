@@ -29,7 +29,7 @@ object SkullUtil
         val skullMeta = skull.itemMeta as SkullMeta
         skullMeta.owner = tempname
         skullMeta.lore = descrption.map { Chat.format(it) }
-        skullMeta.displayName = Chat.format(displayname)
+        skullMeta.setDisplayName(Chat.format(displayname))
         try
         {
             val profileField: Field = skullMeta.javaClass.getDeclaredField("profile")
@@ -51,13 +51,13 @@ object SkullUtil
 
     fun generate(owner: String, displayname: String): ItemStack
     {
-        val itemstack = ItemStack(Material.SKULL_ITEM)
+        val itemstack = ItemStack(Material.PLAYER_HEAD)
 
         itemstack.durability = 3
 
         val itemMeta = itemstack.itemMeta as SkullMeta
 
-        itemMeta.displayName = Chat.format(displayname)
+        itemMeta.setDisplayName(Chat.format(displayname))
         itemMeta.owner = owner
 
         itemstack.itemMeta = itemMeta

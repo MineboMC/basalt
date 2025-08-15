@@ -19,7 +19,7 @@ class TagCustomizationButton(var tag: Tag) : Button()
 
     override fun getMaterial(player: Player): Material
     {
-        return Material.INK_SACK
+        return Material.matchMaterial("${BasaltAPI.getWoolColor(tag.menuName)}_DYE") ?: Material.WHITE_DYE
     }
 
     override fun getDescription(player: Player): MutableList<String>
@@ -92,7 +92,7 @@ class TagCustomizationButton(var tag: Tag) : Button()
                         return Chat.format("&ePlease type a prefix change for this tag, or type &ccancel &eto cancel.")
                     }
 
-                    override fun acceptInput(context: ConversationContext, input: String): Prompt?
+                    override fun acceptInput(context: ConversationContext, input: String?): Prompt?
                     {
                         return if (input.equals("cancel", ignoreCase = true))
                         {
@@ -101,8 +101,8 @@ class TagCustomizationButton(var tag: Tag) : Button()
                         } else
                         {
 
-                            Bukkit.getScheduler().runTaskLater(BasaltSpigotPlugin.instance, {
-                                tag.prefix = input
+                            Bukkit.getScheduler().runTaskLater(BasaltSpigotPlugin.instance, Runnable {
+                                tag.prefix = input!!
                                 TagService.save(tag)
                                 AsynchronousRedisSender.send(RefreshTagsPacket())
                                 player.sendMessage(Chat.format("&aUpdated the prefix of ${tag.menuName}"))
@@ -128,7 +128,7 @@ class TagCustomizationButton(var tag: Tag) : Button()
                         return Chat.format("&ePlease type a menu name for this tag, or type &ccancel &eto cancel.")
                     }
 
-                    override fun acceptInput(context: ConversationContext, input: String): Prompt?
+                    override fun acceptInput(context: ConversationContext, input: String?): Prompt?
                     {
                         return if (input.equals("cancel", ignoreCase = true))
                         {
@@ -137,8 +137,8 @@ class TagCustomizationButton(var tag: Tag) : Button()
                         } else
                         {
 
-                            Bukkit.getScheduler().runTaskLater(BasaltSpigotPlugin.instance, {
-                                tag.menuName = input
+                            Bukkit.getScheduler().runTaskLater(BasaltSpigotPlugin.instance, Runnable{
+                                tag.menuName = input!!
                                 TagService.save(tag)
                                 AsynchronousRedisSender.send(RefreshTagsPacket())
                                 player.sendMessage(Chat.format("&aUpdated the menuname of ${tag.menuName}"))

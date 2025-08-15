@@ -21,8 +21,8 @@ object DisguiseLoginTask :  BukkitPostLoginTask
 
             if (attribute != null)
             {
-                player.displayName = attribute.customName
-                player.playerListName = player.displayName
+                player.setDisplayName(attribute.customName)
+                player.setPlayerListName(player.displayName)
                 player.customName = player.displayName
 
                 DisguiseAPI.getDefaultProvider().updatePlayer(player, Skin(attribute.texture, attribute.signature), attribute.customName)

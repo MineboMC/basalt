@@ -158,7 +158,7 @@ class GrantConfigureMenu(val player: Player, val category: GrantConfigCategory) 
     {
         override fun getMaterial(player: Player): Material
         {
-            return Material.STAINED_GLASS_PANE
+            return (if (entry) Material.LIME_WOOL else Material.GRAY_WOOL)
         }
 
         override fun getDescription(player: Player): MutableList<String>

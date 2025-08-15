@@ -27,7 +27,7 @@ class TagGrantButton(var tag: Tag, var gameProfile: GameProfile) : Button()
 
     override fun getMaterial(player: Player): Material
     {
-        return Material.WOOL
+        return return Material.matchMaterial("${BasaltAPI.getWoolColor(tag.menuName)}_WOOL") ?: Material.WHITE_WOOL
     }
 
     override fun getDescription(player: Player): MutableList<String>
@@ -71,7 +71,7 @@ class TagGrantButton(var tag: Tag, var gameProfile: GameProfile) : Button()
                         return Chat.format("&ePlease type a reason for this grant, or type &ccancel &eto cancel.")
                     }
 
-                    override fun acceptInput(context: ConversationContext, input: String): Prompt?
+                    override fun acceptInput(context: ConversationContext, input: String?): Prompt?
                     {
                         if (input.equals("cancel", ignoreCase = true))
                         {
@@ -81,8 +81,8 @@ class TagGrantButton(var tag: Tag, var gameProfile: GameProfile) : Button()
                         {
                             val reason = input
 
-                            Bukkit.getScheduler().runTaskLater(BasaltSpigotPlugin.instance, {
-                                durationConversation(player, reason)
+                            Bukkit.getScheduler().runTaskLater(BasaltSpigotPlugin.instance, Runnable {
+                                durationConversation(player, reason!!)
                             }, 5L)
                             return Prompt.END_OF_CONVERSATION
                         }
@@ -105,7 +105,7 @@ class TagGrantButton(var tag: Tag, var gameProfile: GameProfile) : Button()
                         return Chat.format("&ePlease type a duration for this grant, (\"perm\" for permanent), or type &ccancel &eto cancel.")
                     }
 
-                    override fun acceptInput(context: ConversationContext, input: String): Prompt?
+                    override fun acceptInput(context: ConversationContext, input: String?): Prompt?
                     {
                         return if (input.equals("cancel", ignoreCase = true))
                         {
@@ -122,7 +122,7 @@ class TagGrantButton(var tag: Tag, var gameProfile: GameProfile) : Button()
                                 Long.MAX_VALUE
                             } else
                             {
-                                TimeUtil.parseTime(input).toLong() * 1000L
+                                TimeUtil.parseTime(input!!).toLong() * 1000L
                             }
 
                             if (duration <= 0)
@@ -131,7 +131,7 @@ class TagGrantButton(var tag: Tag, var gameProfile: GameProfile) : Button()
                                 return END_OF_CONVERSATION
                             }
 
-                            Bukkit.getScheduler().runTaskLater(BasaltSpigotPlugin.instance, {
+                            Bukkit.getScheduler().runTaskLater(BasaltSpigotPlugin.instance, Runnable {
                                 val taggrant = TagGrant(
                                     tag.id,
                                     gameProfile.uuid,

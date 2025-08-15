@@ -101,7 +101,7 @@ class StaffmodeFunctionalityListener : Listener
 
                 if (itemInHand.isSimilar(StaffItems.VANISH))
                 {
-                    player.inventory.itemInHand = StaffItems.UNVANISH
+                    player.inventory.setItemInMainHand(StaffItems.UNVANISH)
 
                     StaffSuiteVisibilityHandler.onDisableVisbility(player)
 
@@ -110,7 +110,7 @@ class StaffmodeFunctionalityListener : Listener
 
                 if (itemInHand.isSimilar(StaffItems.UNVANISH))
                 {
-                    player.inventory.itemInHand = StaffItems.VANISH
+                    player.inventory.setItemInMainHand(StaffItems.VANISH)
 
                     StaffSuiteVisibilityHandler.onEnableVisibility(player)
 
@@ -139,7 +139,7 @@ class StaffmodeFunctionalityListener : Listener
         {
             if (e.currentItem != null)
             {
-                if (e.currentItem.isSimilar(StaffItems.EDIT_MOD_MODE))
+                if (e.currentItem!!.isSimilar(StaffItems.EDIT_MOD_MODE))
                 {
                     EditModModeMenu(player).openMenu()
                     player.sendMessage(Chat.format("&eYou are now editing your &amod mode"))

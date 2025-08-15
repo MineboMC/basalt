@@ -47,7 +47,7 @@ class DisguiseSelectNameMenu(val player: Player) : Menu(player)
         }
 
         buttons[4] = SimpleActionButton(
-            Material.SIGN,
+            Material.OAK_SIGN,
             mutableListOf(
                 " ",
                 Chat.format("&7Click to type in a custom"),

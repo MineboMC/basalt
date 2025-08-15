@@ -52,11 +52,11 @@ class InputPrompt : StringPrompt()
         return promptText
     }
 
-    override fun acceptInput(context: ConversationContext, input: String): Prompt?
+    override fun acceptInput(context: ConversationContext, input: String?): Prompt?
     {
         if (charLimit != -1)
         {
-            if (input.length > charLimit)
+            if (input!!.length > charLimit)
             {
                 context.forWhom.sendRawMessage("${ChatColor.RED}Input text is too long! (${input.length} > ${charLimit})")
                 fail?.invoke(input)
@@ -66,7 +66,7 @@ class InputPrompt : StringPrompt()
 
         if (regex != null)
         {
-            if (!input.matches(regex!!))
+            if (!input!!.matches(regex!!))
             {
                 context.forWhom.sendRawMessage("${ChatColor.RED}Input text does not match regex pattern ${regex!!.pattern}.")
                 fail?.invoke(input)
@@ -76,11 +76,11 @@ class InputPrompt : StringPrompt()
 
         try
         {
-            use!!.invoke(input)
+            use!!.invoke(input!!)
         } catch (e: Exception)
         {
             context.forWhom.sendRawMessage("${ChatColor.RED}Failed to handle input: ${ChatColor.WHITE}${input}")
-            fail?.invoke(input)
+            fail?.invoke(input!!)
         }
 
         return Prompt.END_OF_CONVERSATION

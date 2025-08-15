@@ -13,7 +13,7 @@ class AdminChatPacket(val message: String, val server: String, val sender: UUID)
     {
         val name = BasaltAPI.getRankDisplay(sender)
         val msg =
-            BasaltAPI.AC_FORMAT.replace("%server%", server).replace("%profile%", name).replace("%message%", message)
+            BasaltAPI.AC_FORMAT!!.replace("%server%", server).replace("%profile%", name).replace("%message%", message)
         Bukkit.getOnlinePlayers().filter { it.hasPermission("basalt.admin") }
             .forEach { it.sendMessage(Chat.format(msg)) }
     }

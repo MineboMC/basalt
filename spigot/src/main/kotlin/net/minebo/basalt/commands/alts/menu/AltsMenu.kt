@@ -39,7 +39,7 @@ class AltsMenu(var player: Player, var target: GameProfile, var alts: MutableLis
     {
         override fun getMaterial(player: Player): Material
         {
-            return Material.SKULL_ITEM
+            return Material.PLAYER_HEAD
         }
 
         override fun getDescription(player: Player): MutableList<String>

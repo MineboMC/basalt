@@ -32,7 +32,7 @@ object NameTagFeature
     fun startNametagUpdateTask()
     {
         Bukkit.getScheduler().runTaskTimer(
-            BasaltSpigotPlugin.instance, {
+            BasaltSpigotPlugin.instance, Runnable {
                 for (player in Bukkit.getOnlinePlayers())
                 {
                     if (StaffSuiteManager.isModMode(player))

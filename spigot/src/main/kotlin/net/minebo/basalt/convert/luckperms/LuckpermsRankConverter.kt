@@ -24,7 +24,7 @@ object LuckpermsRankConverter : IRankConverter
 {
     override fun convert(player: Player)
     {
-        val provider = Bukkit.getServicesManager().getRegistration(LuckPerms::class.java).provider
+        val provider = Bukkit.getServicesManager().getRegistration(LuckPerms::class.java)!!.provider
 
         if (provider != null)
         {

@@ -40,7 +40,7 @@ class StaffLeaderboardMenu(val player: Player, val preLoadedButtons: MutableMap<
     {
         override fun getMaterial(player: Player): Material
         {
-            return Material.WOOL
+            return Material.matchMaterial("${BasaltAPI.getWoolColor(type.color)}_WOOL") ?: Material.WHITE_WOOL
         }
 
         override fun getDescription(player: Player): MutableList<String>

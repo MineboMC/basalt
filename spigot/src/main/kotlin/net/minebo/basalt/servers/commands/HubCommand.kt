@@ -39,7 +39,7 @@ object HubCommand : BaseCommand()
         player.sendMessage(
             Chat.format(
                 BasaltSpigotPlugin.instance.config.getString("hubCommand.connectedMessage")
-                    .replace("{hub}", selectedServer.displayName)
+                    !!.replace("{hub}", selectedServer.displayName)
             )
         )
     }

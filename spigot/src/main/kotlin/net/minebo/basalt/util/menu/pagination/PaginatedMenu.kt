@@ -240,9 +240,9 @@ abstract class PaginatedMenu(
             {
                 if (player.openInventory.topInventory != null)
                 {
-                    Bukkit.getScheduler().runTask(BasaltSpigotPlugin.instance) {
+                    Bukkit.getScheduler().runTask(BasaltSpigotPlugin.instance, Runnable{
                         player.closeInventory()
-                    }
+                    })
                     player.sendMessage(Chat.format("&cCould not set contents. Please try again"))
                 }
             }
@@ -259,21 +259,19 @@ abstract class PaginatedMenu(
                     MenuController.paginatedMenuMap.remove(player.uniqueId)
                 }
 
-                Bukkit.getScheduler().runTask(BasaltSpigotPlugin.instance) {
+                Bukkit.getScheduler().runTask(BasaltSpigotPlugin.instance, Runnable {
                     player.closeInventory()
-                }
+                })
 
                 return@whenComplete
             }
 
             Bukkit.getScheduler()
-                .runTask(
-                    BasaltSpigotPlugin.instance
-                ) {
+                .runTask(BasaltSpigotPlugin.instance, Runnable {
                     player.updateInventory()
 
                     MenuController.paginatedMenuMap[player.uniqueId] = this
-                }
+                })
         }
     }
 
@@ -314,14 +312,12 @@ abstract class PaginatedMenu(
             }
 
             Bukkit.getScheduler()
-                .runTask(
-                    BasaltSpigotPlugin.instance
-                ) {
+                .runTask(BasaltSpigotPlugin.instance, Runnable {
                     player.openInventory(inventory)
                     player.updateInventory()
 
                     MenuController.paginatedMenuMap[player.uniqueId] = this
-                }
+                })
         }
     }
 

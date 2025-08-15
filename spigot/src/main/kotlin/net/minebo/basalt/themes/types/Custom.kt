@@ -81,7 +81,7 @@ class Custom : Theme(
                     .map {
                         BasaltSpigotPlugin.instance.config.getString(
                             "custom-theme.grants.lore.scope-display"
-                        ).replace(
+                        )!!.replace(
                             "<scope>",
                             it
                         )
@@ -121,7 +121,7 @@ class Custom : Theme(
         }
         return Chat.format(
             BasaltSpigotPlugin.instance.config.getString(key)
-                .replace("<issued_date>", TimeUtil.dateToString(Date(rankGrant.expirable.addedAt)))
+                !!.replace("<issued_date>", TimeUtil.dateToString(Date(rankGrant.expirable.addedAt)))
         )
     }
 

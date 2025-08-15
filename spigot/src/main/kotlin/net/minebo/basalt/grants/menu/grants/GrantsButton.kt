@@ -22,7 +22,7 @@ class GrantsButton(var rankGrant: RankGrant) : Button()
 
     override fun getMaterial(player: Player): Material
     {
-        return Material.WOOL
+        return Material.matchMaterial("${BasaltAPI.getWoolColor(ThemeLoader.defaultTheme.getGrantsData(player, rankGrant))}_WOOL") ?: Material.WHITE_WOOL
     }
 
     override fun getDescription(player: Player): MutableList<String>
@@ -59,7 +59,7 @@ class GrantsButton(var rankGrant: RankGrant) : Button()
                                     return Chat.format("&ePlease type a reason for this grant to be removed, or type &ccancel &eto cancel.")
                                 }
 
-                                override fun acceptInput(context: ConversationContext, input: String): Prompt?
+                                override fun acceptInput(context: ConversationContext, input: String?): Prompt?
                                 {
                                     if (input.equals("cancel", ignoreCase = true))
                                     {
@@ -67,7 +67,7 @@ class GrantsButton(var rankGrant: RankGrant) : Button()
                                         return Prompt.END_OF_CONVERSATION
                                     } else
                                     {
-                                        Bukkit.getScheduler().runTaskLater(BasaltSpigotPlugin.instance, {
+                                        Bukkit.getScheduler().runTaskLater(BasaltSpigotPlugin.instance, Runnable{
                                             rankGrant.expirable.removedAt = System.currentTimeMillis()
                                             rankGrant.removedReason = input
                                             rankGrant.removedBy = player.uniqueId

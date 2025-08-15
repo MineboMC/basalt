@@ -39,7 +39,7 @@ class SelectRankMenu(val player: Player, val server: UniqueServer) : PaginatedMe
     {
         override fun getMaterial(player: Player): Material
         {
-            return Material.WOOL
+            return Material.matchMaterial("${Chat.getDyeColor(rank.color)}_WOOL") ?: Material.WHITE_WOOL
         }
 
         override fun getDescription(player: Player): MutableList<String>

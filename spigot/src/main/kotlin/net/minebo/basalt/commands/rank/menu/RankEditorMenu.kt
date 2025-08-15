@@ -113,7 +113,7 @@ class RankEditorMenu(
     {
         override fun getMaterial(player: Player): Material
         {
-            return Material.INK_SACK
+            return Material.INK_SAC
         }
 
         override fun getDescription(player: Player): MutableList<String>

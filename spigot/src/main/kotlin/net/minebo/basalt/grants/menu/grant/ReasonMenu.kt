@@ -1,6 +1,7 @@
 package net.minebo.basalt.grants.menu.grant
 
 import net.minebo.basalt.BasaltSpigotPlugin
+import net.minebo.basalt.api.BasaltAPI
 import net.minebo.basalt.grants.GrantConfigurationService
 import net.minebo.basalt.grants.menu.grant.scope.ScopeSelectionMenu
 import net.minebo.basalt.models.profile.GameProfile
@@ -60,7 +61,7 @@ class ReasonMenu(val player: Player, val rank: Rank, val target: GameProfile, va
     {
         override fun getMaterial(player: Player): Material
         {
-            return Material.getMaterial(item) ?: Material.WOOL
+            return Material.getMaterial(item) ?: Material.matchMaterial("${BasaltAPI.getWoolColor(data)}_WOOL") ?: Material.WHITE_WOOL
         }
 
         override fun getDescription(player: Player): MutableList<String>
@@ -93,7 +94,7 @@ class ReasonMenu(val player: Player, val rank: Rank, val target: GameProfile, va
                                 return Chat.format("&ePlease type a reason for this grant, or type &ccancel &eto cancel.")
                             }
 
-                            override fun acceptInput(context: ConversationContext, input: String): Prompt?
+                            override fun acceptInput(context: ConversationContext, input: String?): Prompt?
                             {
                                 if (input.equals("cancel", ignoreCase = true))
                                 {
@@ -108,7 +109,7 @@ class ReasonMenu(val player: Player, val rank: Rank, val target: GameProfile, va
                                         rank,
                                         target,
                                         duration,
-                                        internalreason,
+                                        internalreason!!,
                                         mutableListOf(),
                                         false
                                     ).updateMenu()

@@ -111,7 +111,7 @@ class RankEditPropertiesMenu(val player: Player, val rank: Rank) : Menu(player)
         }
 
         buttons[13] = SimpleActionButton(
-            Material.EXP_BOTTLE,
+            Material.EXPERIENCE_BOTTLE,
             mutableListOf(
                 " ",
                 Chat.format("&7Change the display color of this rank."),

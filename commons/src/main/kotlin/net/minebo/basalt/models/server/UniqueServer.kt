@@ -9,6 +9,7 @@ data class UniqueServer(
     var displayName: String,
     var queueName: String,
     var players: ArrayList<UUID>,
+    var slots: Int,
     var online: Boolean,
     var ramAllocated: Int,
     var bungeeName: String,

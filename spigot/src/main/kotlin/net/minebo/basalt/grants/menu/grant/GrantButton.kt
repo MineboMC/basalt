@@ -1,5 +1,6 @@
 package net.minebo.basalt.grants.menu.grant
 
+import net.minebo.basalt.api.BasaltAPI
 import net.minebo.basalt.models.profile.GameProfile
 import net.minebo.basalt.models.ranks.Rank
 import net.minebo.basalt.profiles.getProfile
@@ -24,7 +25,7 @@ class GrantButton(var rank: Rank, var gameProfile: GameProfile) : Button()
             return Material.OBSIDIAN
         }
 
-        return Material.WOOL
+        return Material.matchMaterial("${BasaltAPI.getWoolColor(ThemeLoader.defaultTheme.getGrantData(player, rank))}_WOOL") ?: Material.WHITE_WOOL
     }
 
     override fun getDescription(player: Player): MutableList<String>

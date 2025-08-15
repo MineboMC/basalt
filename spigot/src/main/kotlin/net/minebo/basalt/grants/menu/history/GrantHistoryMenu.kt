@@ -1,10 +1,12 @@
 package net.minebo.basalt.grants.menu.history
 
+import net.minebo.basalt.api.BasaltAPI
 import net.minebo.basalt.grants.menu.history.sub.GrantHistoryViewGrants
 import net.minebo.basalt.models.grant.types.RankGrant
 import net.minebo.basalt.models.profile.GameProfile
 import net.minebo.basalt.models.ranks.Rank
 import net.minebo.basalt.service.ranks.RankService
+import net.minebo.basalt.themes.ThemeLoader
 import net.minebo.basalt.util.Chat
 import net.minebo.basalt.util.menu.Button
 import net.minebo.basalt.util.menu.pagination.PaginatedMenu
@@ -38,7 +40,7 @@ class GrantHistoryMenu(val player: Player, val grants: MutableList<RankGrant>, v
     {
         override fun getMaterial(player: Player): Material
         {
-            return Material.INK_SACK
+            return return Material.matchMaterial("${BasaltAPI.getWoolColor(ThemeLoader.defaultTheme.getGrantData(player, rank))}_DYE") ?: Material.INK_SAC
         }
 
         override fun getDescription(player: Player): MutableList<String>

@@ -42,11 +42,11 @@ class PlayerInformationMenu(val player: Player, val target: GameProfile) : Menu(
         val buttons = mutableMapOf<Int, Button>()
         for (int in 0 until 54)
         {
-            buttons[int] = PlaceholderButton(Material.STAINED_GLASS_PANE, mutableListOf(), "", 7)
+            buttons[int] = PlaceholderButton(Material.GRAY_STAINED_GLASS_PANE, mutableListOf(), "", 7)
         }
 
         buttons[4] = PlaceholderButton(
-            Material.SKULL_ITEM,
+            Material.PLAYER_HEAD,
             mutableListOf(),
             Chat.format(BasaltAPI.getRankDisplay(target.uuid) + "'s &7Profile View"),
             0
@@ -94,7 +94,7 @@ class PlayerInformationMenu(val player: Player, val target: GameProfile) : Menu(
         }
 
         buttons[25] = SimpleActionButton(
-            Material.WOOL, mutableListOf(
+            Material.LIME_WOOL, mutableListOf(
                 " ",
                 Chat.format("&7Click this button to view"),
                 Chat.format("&7the rank grants of this"),
@@ -122,7 +122,7 @@ class PlayerInformationMenu(val player: Player, val target: GameProfile) : Menu(
         }
 
         buttons[39] = SimpleActionButton(
-            Material.REDSTONE_COMPARATOR, mutableListOf(
+            Material.COMPARATOR, mutableListOf(
                 " ",
                 Chat.format("&7Click this button to view"),
                 Chat.format("&7the friends of this user"),
@@ -145,7 +145,7 @@ class PlayerInformationMenu(val player: Player, val target: GameProfile) : Menu(
         }
 
         buttons[43] = SimpleActionButton(
-            Material.CAULDRON_ITEM, mutableListOf(
+            Material.CAULDRON, mutableListOf(
                 " ",
                 Chat.format("&7Click this button to view"),
                 Chat.format("&7the raw JSON dump of this"),

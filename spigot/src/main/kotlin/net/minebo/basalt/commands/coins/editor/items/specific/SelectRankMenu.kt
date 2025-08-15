@@ -37,7 +37,7 @@ class SelectRankMenu(val player: Player, val item: CoinShopItem) : PaginatedMenu
     {
         override fun getMaterial(player: Player): Material
         {
-            return Material.WOOL
+            return Material.matchMaterial("${BasaltAPI.getWoolColor(rank.color)}_WOOL") ?: Material.WHITE_WOOL
         }
 
         override fun getDescription(player: Player): MutableList<String>

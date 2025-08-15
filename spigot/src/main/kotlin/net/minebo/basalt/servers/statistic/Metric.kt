@@ -68,7 +68,7 @@ class Metric(plugin: JavaPlugin, serviceId: Int)
         val logResponseStatusText = config.getBoolean("logResponseStatusText", false)
         metricsBase = MetricsBase(
             "bukkit",
-            serverUUID,
+            serverUUID!!,
             serviceId,
             enabled,
             { builder: JsonObjectBuilder ->
@@ -82,7 +82,7 @@ class Metric(plugin: JavaPlugin, serviceId: Int)
                 )
             },
             { submitDataTask: Runnable? ->
-                Bukkit.getScheduler().runTask(plugin, submitDataTask)
+                Bukkit.getScheduler().runTask(plugin, submitDataTask!!)
             },
             { plugin.isEnabled },
             { message: String?, error: Throwable? ->

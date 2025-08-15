@@ -14,7 +14,7 @@ class ToggleStaffChatSetting(val profile: GameProfile) : Button()
 {
     override fun getMaterial(player: Player): Material
     {
-        return Material.WOOL
+        return if (profile.hasMetadata("toggleSC")) Material.LIME_WOOL else Material.RED_WOOL
     }
 
     override fun getDescription(player: Player): MutableList<String>

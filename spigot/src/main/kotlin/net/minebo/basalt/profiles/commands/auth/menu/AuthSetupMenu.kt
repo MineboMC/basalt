@@ -99,7 +99,7 @@ class AuthSetupMenu(val player: Player) : Menu(player)
         )
 
         buttons[30] = SimpleActionButton(
-            Material.WOOL, mutableListOf(),
+            Material.LIME_WOOL, mutableListOf(),
             "&aI Accept This Information",
             5
         ).setBody { player, i, clickType ->
@@ -118,7 +118,7 @@ class AuthSetupMenu(val player: Player) : Menu(player)
         }
 
         buttons[32] = SimpleActionButton(
-            Material.WOOL, mutableListOf(),
+            Material.RED_WOOL, mutableListOf(),
             "&cI Decline This Information",
             14
         ).setBody { player, i, clickType ->

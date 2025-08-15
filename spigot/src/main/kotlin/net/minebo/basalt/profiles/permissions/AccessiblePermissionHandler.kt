@@ -67,16 +67,17 @@ object AccessiblePermissionHandler
 
         val profile: GameProfile = player.getProfile() ?: return
 
-        Bukkit.getScheduler().runTask(BasaltSpigotPlugin.instance) {
+        Bukkit.getScheduler().runTask(BasaltSpigotPlugin.instance, Runnable {
             //apply display name
-            player.displayName = format(profile.getCurrentRank().color + player.name)
+            player.setDisplayName(profile.getCurrentRank().color + player.name)
 
             //set metadata values
             player.removeMetadata("BasaltRankWeight", BasaltSpigotPlugin.instance)
             player.setMetadata(
                 "BasaltRankWeight",
                 FixedMetadataValue(BasaltSpigotPlugin.instance, (profile.getCurrentRank().weight))
-            )
-        }
+                )
+            }
+        )
     }
 }

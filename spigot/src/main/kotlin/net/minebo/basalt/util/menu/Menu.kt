@@ -46,7 +46,7 @@ abstract class Menu(
     //dont need to use update menu because it is just placing items in menu. If it gets to it ill do it
     fun openMenu()
     {
-        Bukkit.getScheduler().runTask(BasaltSpigotPlugin.instance) {
+        Bukkit.getScheduler().runTask(BasaltSpigotPlugin.instance, Runnable {
             var finalSize = size(getButtons(player))
 
             if (staticSize != null)
@@ -93,7 +93,7 @@ abstract class Menu(
 
             if (placeholder)
             {
-                val placeholder = PlaceholderButton(Material.STAINED_GLASS_PANE, mutableListOf(), "", 7)
+                val placeholder = PlaceholderButton(Material.GRAY_STAINED_GLASS_PANE, mutableListOf(), "", 7)
 
                 for (index in 0 until staticSize!!)
                 {
@@ -121,13 +121,11 @@ abstract class Menu(
                 }
 
                 Bukkit.getScheduler()
-                    .runTask(
-                        BasaltSpigotPlugin.instance
-                    ) {
+                    .runTask(BasaltSpigotPlugin.instance, Runnable {
                         player.openInventory(inventory)
                         player.updateInventory()
-                    }
+                    })
             }
-        }
+        })
     }
 }

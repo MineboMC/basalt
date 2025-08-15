@@ -35,7 +35,16 @@ class VoucherGrantsMenu(val player: Player, val vouchers: List<VoucherGrant>) : 
     {
         override fun getMaterial(player: Player): Material
         {
-            return Material.WOOL
+            if (System.currentTimeMillis() >= voucher.redeemByDuration) {
+                return Material.GRAY_WOOL
+            }
+
+            if (voucher.completed)
+            {
+                return Material.RED_WOOL
+            }
+
+            return Material.GREEN_WOOL
         }
 
         override fun getDescription(player: Player): MutableList<String>

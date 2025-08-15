@@ -22,7 +22,7 @@ dependencies {
     implementation project(":commons")
 
     //bukkit
-    compileOnly 'org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT'
+    compileOnly 'io.papermc.paper:paper-api:1.21-R0.1-SNAPSHOT'
 
     //apis
     compileOnly "com.github.MilkBowl:VaultAPI:1.7"

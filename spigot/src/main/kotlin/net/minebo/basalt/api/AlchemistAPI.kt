@@ -99,6 +99,28 @@ object BasaltAPI
         }
     }
 
+    fun getWoolColor(color: Short): DyeColor {
+        return when (color.toInt()) {
+            0 -> DyeColor.WHITE
+            1 -> DyeColor.ORANGE
+            2 -> DyeColor.MAGENTA
+            3 -> DyeColor.LIGHT_BLUE
+            4 -> DyeColor.YELLOW
+            5 -> DyeColor.LIME
+            6 -> DyeColor.PINK
+            7 -> DyeColor.GRAY
+            8 -> DyeColor.LIGHT_GRAY // was "SILVER"
+            9 -> DyeColor.CYAN
+            10 -> DyeColor.PURPLE
+            11 -> DyeColor.BLUE
+            12 -> DyeColor.BROWN
+            13 -> DyeColor.GREEN
+            14 -> DyeColor.RED
+            15 -> DyeColor.BLACK
+            else -> DyeColor.WHITE
+        }
+    }
+
     fun getWoolColor(color: String): DyeColor
     {
         return when {
@@ -108,7 +130,7 @@ object BasaltAPI
             color.contains("&4") || color.contains("&c") -> DyeColor.RED
             color.contains("&5") -> DyeColor.PURPLE
             color.contains("&6") -> DyeColor.ORANGE
-            color.contains("&7") -> DyeColor.SILVER
+            color.contains("&7") -> DyeColor.LIGHT_GRAY
             color.contains("&8") -> DyeColor.GRAY
             color.contains("&a") -> DyeColor.LIME
             color.contains("&b") -> DyeColor.LIGHT_BLUE
@@ -127,7 +149,7 @@ object BasaltAPI
             color.contains("&4") || color.contains("&c") -> DyeColor.RED
             color.contains("&5") -> DyeColor.PURPLE
             color.contains("&6") -> DyeColor.ORANGE
-            color.contains("&7") -> DyeColor.SILVER
+            color.contains("&7") -> DyeColor.LIGHT_GRAY
             color.contains("&8") -> DyeColor.GRAY
             color.contains("&a") -> DyeColor.LIME
             color.contains("&b") -> DyeColor.LIGHT_BLUE

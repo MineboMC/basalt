@@ -1,5 +1,6 @@
 package net.minebo.basalt.punishment.commands.menu.impl
 
+import net.minebo.basalt.api.BasaltAPI
 import net.minebo.basalt.models.grant.types.Punishment
 import net.minebo.basalt.punishment.commands.menu.impl.proof.ProofMenu
 import net.minebo.basalt.themes.ThemeLoader
@@ -13,7 +14,7 @@ class GeneralPunishmentButton(var punishment: Punishment) : Button()
 
     override fun getMaterial(player: Player): Material
     {
-        return Material.WOOL
+        return Material.matchMaterial("${BasaltAPI.getWoolColor(ThemeLoader.defaultTheme.getHistoryData(player, punishment))}_WOOL") ?: Material.WHITE_WOOL
     }
 
     override fun getDescription(player: Player): MutableList<String>

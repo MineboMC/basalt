@@ -80,7 +80,7 @@ object Chat
     {
         val names = NamedTextColor.NAMES
 
-        return names.value(org.bukkit.ChatColor.getByChar(color.replace("&", "")).name.lowercase())
+        return names.value(org.bukkit.ChatColor.getByChar(color.replace("&", ""))!!.name.lowercase())
     }
 
     fun mapChatColorToSkullTexture(str: String): String
@@ -110,7 +110,7 @@ object Chat
         if (str.contains("&5")) return DyeColor.PURPLE
         if (str.contains("&6")) return DyeColor.ORANGE
         if (str.contains("&7")) return DyeColor.GRAY
-        if (str.contains("&8")) return DyeColor.SILVER
+        if (str.contains("&8")) return DyeColor.LIGHT_GRAY
         if (str.contains("&a")) return DyeColor.LIME
         if (str.contains("&b")) return DyeColor.LIGHT_BLUE
         if (str.contains("&d")) return DyeColor.PINK

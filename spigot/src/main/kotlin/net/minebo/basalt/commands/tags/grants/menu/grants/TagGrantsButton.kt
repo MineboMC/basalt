@@ -17,7 +17,7 @@ class TagGrantsButton(var tag: TagGrant) : Button()
 
     override fun getMaterial(player: Player): Material
     {
-        return Material.WOOL
+        return (if (tag.expirable.isActive()) Material.LIME_WOOL else Material.RED_WOOL)
     }
 
     override fun getDescription(player: Player): MutableList<String>

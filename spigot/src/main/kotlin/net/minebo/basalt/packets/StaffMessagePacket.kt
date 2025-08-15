@@ -14,7 +14,7 @@ class StaffMessagePacket(val message: String, val server: String, val sender: UU
     {
         val name = BasaltAPI.getRankDisplay(sender)
         val msg =
-            BasaltAPI.SC_FORMAT.replace("%server%", server).replace("%profile%", name).replace("%message%", message)
+            BasaltAPI.SC_FORMAT!!.replace("%server%", server).replace("%profile%", name).replace("%message%", message)
         Bukkit.getOnlinePlayers()
             .filter { it.hasPermission("basalt.staff") && StaffSuiteManager.hasStaffchatEnabled(it) }
             .forEach { it.sendMessage(Chat.format(msg)) }

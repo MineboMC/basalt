@@ -119,7 +119,7 @@ class BasaltSpigotPlugin : JavaPlugin()
                     databaseName = config.getString("mongo.database")
                 },
             true,
-            config.getString("redis.host"),
+            config.getString("redis.host")!!,
             config.getInt("redis.port"),
             (if (config.getString("redis.username") == "") null else config.getString("redis.username")),
             (if (config.getString("redis.password") == "") null else config.getString("redis.password")),
@@ -239,12 +239,12 @@ class BasaltSpigotPlugin : JavaPlugin()
         if (config.getBoolean("discord.punishments.enabled"))
         {
 
-            WebhookService.createPunishmentClient(config.getString("discord.punishments.webhookLink"))
+            WebhookService.createPunishmentClient(config.getString("discord.punishments.webhookLink")!!)
         }
 
         if (config.getBoolean("discord.grants.enabled"))
         {
-            WebhookService.createRankGrantClient(config.getString("discord.grants.webhookLink"))
+            WebhookService.createRankGrantClient(config.getString("discord.grants.webhookLink")!!)
         }
 
         Chat.sendConsoleMessage(

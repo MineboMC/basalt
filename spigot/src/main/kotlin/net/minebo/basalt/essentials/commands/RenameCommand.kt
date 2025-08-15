@@ -31,7 +31,7 @@ class RenameCommand : BaseCommand()
 
         val meta = inHand.itemMeta
 
-        meta.displayName = Chat.format(name)
+        meta.setDisplayName(Chat.format(name))
         inHand.itemMeta = meta
 
         player.updateInventory()

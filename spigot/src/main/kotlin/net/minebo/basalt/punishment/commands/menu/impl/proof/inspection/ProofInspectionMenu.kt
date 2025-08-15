@@ -7,6 +7,7 @@ import net.minebo.basalt.models.grant.types.proof.ProofEntry
 import net.minebo.basalt.punishment.commands.menu.impl.proof.ProofMenu
 import net.minebo.basalt.punishment.commands.menu.impl.proof.sub.ProofSelectTypeMenu
 import net.minebo.basalt.service.expirable.PunishmentService
+import net.minebo.basalt.themes.ThemeLoader
 import net.minebo.basalt.util.Chat
 import net.minebo.basalt.util.menu.Button
 import net.minebo.basalt.util.menu.Menu
@@ -44,7 +45,7 @@ class ProofInspectionMenu(val player: Player, val punishment: Punishment, val pr
     {
         override fun getMaterial(player: Player): Material
         {
-            return Material.WOOL
+            return Material.matchMaterial("${BasaltAPI.getWoolColor(ThemeLoader.defaultTheme.getHistoryData(player, punishment))}_WOOL") ?: Material.WHITE_WOOL
         }
 
         override fun getDescription(player: Player): MutableList<String>?

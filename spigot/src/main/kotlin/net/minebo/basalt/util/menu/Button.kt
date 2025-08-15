@@ -31,7 +31,7 @@ abstract class Button
     {
         fun placeholder(): Button
         {
-            return PlaceholderButton(Material.STAINED_GLASS_PANE, mutableListOf(), Chat.format("&f"), 7)
+            return PlaceholderButton(Material.GRAY_STAINED_GLASS_PANE, mutableListOf(), Chat.format("&f"), 7)
         }
     }
 
@@ -48,7 +48,7 @@ abstract class Button
 
         val itemMeta = itemStack.itemMeta
 
-        itemMeta.displayName = getDisplayName(player)
+        itemMeta.setDisplayName(getDisplayName(player))
         itemMeta.lore = getDescription(player)
         itemStack.itemMeta = itemMeta
         itemStack.amount = setCustomAmount(player)

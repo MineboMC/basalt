@@ -14,14 +14,14 @@ object MessageHandler
     val replyMap: MutableMap<UUID, UUID> = mutableMapOf()
 
     private val MESSAGE_FORMAT_FROM: String =
-        BasaltSpigotPlugin.instance.config.getString("message.message_format_from")
-    private val MESSAGE_FORMAT_TO: String = BasaltSpigotPlugin.instance.config.getString("message.message_format_to")
+        BasaltSpigotPlugin.instance.config.getString("message.message_format_from")!!
+    private val MESSAGE_FORMAT_TO: String = BasaltSpigotPlugin.instance.config.getString("message.message_format_to")!!
 
     private val STAFF_MESSAGE_FORMAT_FROM: String =
-        BasaltSpigotPlugin.instance.config.getString("message.staff_message_format_from")
+        BasaltSpigotPlugin.instance.config.getString("message.staff_message_format_from")!!
     private val STAFF_MESSAGE_FORMAT_TO: String =
-        BasaltSpigotPlugin.instance.config.getString("message.staff_message_format_to")
-    private val SOUND: String = BasaltSpigotPlugin.instance.config.getString("message.sound")
+        BasaltSpigotPlugin.instance.config.getString("message.staff_message_format_to")!!
+    private val SOUND: String = BasaltSpigotPlugin.instance.config.getString("message.sound")!!
 
     fun message(to: Player, from: CommandSender, message: String)
     {

@@ -42,13 +42,14 @@ class FreerankCommand : BaseCommand()
             {
                 player.sendMessage(Chat.format("&aRedeemed your free rank!"))
 
-                BasaltSpigotPlugin.instance.server.scheduler.runTask(BasaltSpigotPlugin.instance) {
+                BasaltSpigotPlugin.instance.server.scheduler.runTask(BasaltSpigotPlugin.instance, Runnable {
                     Bukkit.dispatchCommand(
                         Bukkit.getConsoleSender(),
-                        BasaltSpigotPlugin.instance.config.getString("freeRank.command")
+                        BasaltSpigotPlugin.instance.config.getString("freeRank.command")!!
                             .replace("<target>", player.name)
-                    )
-                }
+                        )
+                    }
+                )
 
                 gameProfile.metadata.addProperty("redeemedFreeRank", true)
 

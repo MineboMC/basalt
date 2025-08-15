@@ -25,7 +25,7 @@ class GrantsThemeButton(val theme: Theme, val player: Player) : Button()
 
     override fun getMaterial(player: Player): Material
     {
-        return Material.WOOL
+        return Material.matchMaterial("${theme.getGrantsData(player, fakeGrant)}_WOOL") ?: Material.WHITE_WOOL
     }
 
     override fun getDescription(player: Player): MutableList<String>

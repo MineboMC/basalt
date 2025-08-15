@@ -83,7 +83,7 @@ class ModuleEditorMenu(val player: Player) : Menu(player)
         )
 
         buttons[16] = ModuleButton(
-            "modules.chatcolors", "&3&lChatColors", Material.INK_SACK, mutableListOf(
+            "modules.chatcolors", "&3&lChatColors", Material.GLOW_INK_SAC, mutableListOf(
                 " ",
                 Chat.format("&7This module controls custom chat colors"),
                 Chat.format("&7that players can use to make their"),

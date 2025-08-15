@@ -35,16 +35,17 @@ object ServerModule : PluginModule
         val config = BasaltSpigotPlugin.instance.config
         val serversStart = System.currentTimeMillis()
 
-        if (UniqueServerService.byId(config.getString("server.id").lowercase(Locale.getDefault())) == null)
+        if (UniqueServerService.byId(config.getString("server.id")!!.lowercase(Locale.getDefault())) == null)
         {
             val server = UniqueServer(
-                config.getString("server.id").lowercase(),
-                config.getString("server.id"),
-                config.getString("server.id"),
+                config.getString("server.id")!!.lowercase(),
+                config.getString("server.id")!!,
+                config.getString("server.id")!!,
                 arrayListOf(),
+                Bukkit.getServer().maxPlayers,
                 true,
                 (Runtime.getRuntime().maxMemory() / (1024 * 1024)).toInt(),
-                config.getString("server.id"),
+                config.getString("server.id")!!,
                 -1L,
                 false,
                 "",
@@ -60,7 +61,7 @@ object ServerModule : PluginModule
             UniqueServerService.updateGlobalServer(server)
         } else
         {
-            val server = UniqueServerService.byId(config.getString("server.id").lowercase(Locale.getDefault()))!!
+            val server = UniqueServerService.byId(config.getString("server.id")!!.lowercase(Locale.getDefault()))!!
 
             Chat.sendConsoleMessage("&eFound server with the id " + server.id + " in your database")
             server.ramAllocated = (Runtime.getRuntime().maxMemory() / (1024 * 1024)).toInt()

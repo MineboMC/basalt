@@ -1,6 +1,7 @@
 package net.minebo.basalt.grants.menu.grant
 
 import net.minebo.basalt.BasaltSpigotPlugin
+import net.minebo.basalt.api.BasaltAPI
 import net.minebo.basalt.grants.GrantConfigurationService
 import net.minebo.basalt.models.profile.GameProfile
 import net.minebo.basalt.models.ranks.Rank
@@ -84,7 +85,7 @@ class DurationMenu(val player: Player, val rank: Rank, val target: GameProfile) 
     {
         override fun getMaterial(player: Player): Material
         {
-            return Material.getMaterial(material) ?: Material.WOOL
+            return Material.getMaterial(material) ?: Material.matchMaterial("${BasaltAPI.getWoolColor(data)}_WOOL") ?: Material.WHITE_WOOL
         }
 
         override fun getDescription(player: Player): MutableList<String>
@@ -118,7 +119,7 @@ class DurationMenu(val player: Player, val rank: Rank, val target: GameProfile) 
                                 return Chat.format("&ePlease type a duration for this grant, (\"perm\" for permanent), or type &ccancel &eto cancel.")
                             }
 
-                            override fun acceptInput(context: ConversationContext, input: String): Prompt?
+                            override fun acceptInput(context: ConversationContext, input: String?): Prompt?
                             {
                                 return if (input.equals("cancel", ignoreCase = true))
                                 {
@@ -133,7 +134,7 @@ class DurationMenu(val player: Player, val rank: Rank, val target: GameProfile) 
                                         Long.MAX_VALUE
                                     } else
                                     {
-                                        TimeUtil.parseTime(input).toLong() * 1000L
+                                        TimeUtil.parseTime(input!!).toLong() * 1000L
                                     }
 
                                     if (duration <= 0)

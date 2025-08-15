@@ -77,7 +77,7 @@ class ProfileJoinListener : Listener
         val configFormat = BasaltSpigotPlugin.instance.config.getString("chat.format")
         val format = Chat.format(
             configFormat
-                .replace("<prefix_string>", prefixString)
+                !!.replace("<prefix_string>", prefixString)
                 .replace("<rank_string>", rank.prefix)
                 .replace("<player_name>", nameString)
                 .replace("<color_string>", colorString)
@@ -144,7 +144,7 @@ class ProfileJoinListener : Listener
             {
                 val message = ChatService.MUTE_MESSAGE
 
-                event.player.sendMessage(Chat.format(message))
+                event.player.sendMessage(Chat.format(message!!))
 
                 event.isCancelled = true
 
@@ -167,7 +167,7 @@ class ProfileJoinListener : Listener
                     {
                         event.player.sendMessage(
                             Chat.format(
-                                message.replace(
+                                message!!.replace(
                                     "<seconds>",
                                     rem.toString()
                                 )
@@ -192,7 +192,7 @@ class ProfileJoinListener : Listener
             //website sending
             if (msg.contains("http://") || msg.contains("https://"))
             {
-                val rank = RankService.byId(ChatService.MINIMUM_LINK_SEND_RANK.lowercase(Locale.getDefault())) ?: return
+                val rank = RankService.byId(ChatService.MINIMUM_LINK_SEND_RANK!!.lowercase(Locale.getDefault())) ?: return
                 val theirRank = event.player.getCurrentRank()
 
                 if (theirRank.weight < rank.weight)

@@ -28,7 +28,7 @@ class GrantMessageTargetPacket(val target: UUID, val rank: Rank, val duration: L
 
             player.sendMessage(
                 Chat.format(
-                    message
+                    message!!
                         .replace("<rank>", rank.color + rank.displayName)
                         .replace("<duration>", TimeUtil.formatDuration(duration))
                 )

@@ -49,8 +49,8 @@ object DisguiseService
             {
                 this.skinDisguiseAttribute = SkinDisguiseAttribute(name, System.currentTimeMillis(), name, skin.value, skin.signature)
 
-                player.displayName = this.skinDisguiseAttribute!!.customName
-                player.playerListName = player.displayName
+                player.setDisplayName(this.skinDisguiseAttribute!!.customName)
+                player.setPlayerListName(player.displayName)
                 player.customName = player.displayName
 
                 DisguiseAPI.getDefaultProvider().updatePlayer(player, skin, name)

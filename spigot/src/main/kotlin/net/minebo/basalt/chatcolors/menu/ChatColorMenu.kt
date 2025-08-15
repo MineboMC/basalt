@@ -66,9 +66,11 @@ class ChatColorMenu(val player: Player) : PaginatedMenu(18, player)
 
     class ChatColorButton(val chatColor: ChatColor, val player: Player) : Button()
     {
-        override fun getMaterial(player: Player): Material
-        {
-            return Material.WOOL
+        override fun getMaterial(player: Player): Material {
+            // Assuming Chat.getDyeColor(...) returns org.bukkit.DyeColor
+            val dye = Chat.getDyeColor(chatColor.chatColor)
+            // e.g. WHITE -> WHITE_WOOL, LIGHT_BLUE -> LIGHT_BLUE_WOOL, etc.
+            return Material.matchMaterial("${dye.name}_WOOL") ?: Material.WHITE_WOOL
         }
 
         override fun getDescription(player: Player): MutableList<String>

@@ -24,7 +24,7 @@ object SendStaffWelcome : BukkitPostLoginTask
 
     override fun run(player: Player)
     {
-        Bukkit.getScheduler().runTaskLater(BasaltSpigotPlugin.instance, {
+        Bukkit.getScheduler().runTaskLater(BasaltSpigotPlugin.instance, Runnable {
             val config = BasaltSpigotPlugin.instance.config
             val dateFormat = SimpleDateFormat("MM-dd-yyyy", Locale.getDefault())
 
