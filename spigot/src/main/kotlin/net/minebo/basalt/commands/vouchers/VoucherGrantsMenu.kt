@@ -44,7 +44,7 @@ class VoucherGrantsMenu(val player: Player, val vouchers: List<VoucherGrant>) : 
                 return Material.RED_WOOL
             }
 
-            return Material.GREEN_WOOL
+            return Material.LIME_WOOL
         }
 
         override fun getDescription(player: Player): MutableList<String>
