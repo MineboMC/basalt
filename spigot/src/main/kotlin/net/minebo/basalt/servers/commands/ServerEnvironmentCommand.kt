@@ -25,6 +25,7 @@ class ServerEnvironmentCommand : BaseCommand()
         help.showHelp()
     }
 
+    @CommandAlias("servers")
     @Subcommand("menu")
     @CommandPermission("basalt.servers.admin")
     fun servermenu(player: Player)
