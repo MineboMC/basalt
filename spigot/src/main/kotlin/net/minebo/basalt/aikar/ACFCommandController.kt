@@ -51,6 +51,7 @@ import net.minebo.basalt.queue.command.ModifyQueueCommands
 import net.minebo.basalt.queue.command.QueueCommands
 import net.minebo.basalt.redis.command.RedisCommand
 import net.minebo.basalt.servers.commands.BroadcastCommand
+import net.minebo.basalt.servers.commands.ExecuteCommands
 import net.minebo.basalt.themes.commands.ThemeSelectCommand
 import org.bukkit.Bukkit
 import org.bukkit.ChatColor
@@ -117,6 +118,7 @@ object ACFCommandController
             }
 
             registerCommand(BroadcastCommand)
+            registerCommand(ExecuteCommands())
 
             if (config.getBoolean("modules.coins"))
             {

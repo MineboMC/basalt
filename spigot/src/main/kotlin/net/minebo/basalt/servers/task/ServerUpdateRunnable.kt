@@ -14,6 +14,7 @@ object ServerUpdateRunnable : BukkitRunnable()
         val server = Basalt.globalServer
 
         server.players = Bukkit.getOnlinePlayers().map { it.uniqueId }.toCollection(arrayListOf())
+        server.slots = Bukkit.getMaxPlayers()
 
         server.lastHeartbeat = System.currentTimeMillis()
         server.online = true

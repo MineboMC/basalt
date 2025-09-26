@@ -15,7 +15,7 @@ class ToggleModModeOnJoinSetting(val profile: GameProfile) : Button()
 
     override fun getMaterial(player: Player): Material
     {
-        return if (profile.hasMetadata("toggleMM")) Material.LIME_WOOL else Material.RED_WOOL
+        return if (profile.hasMetadata("toggleMM")) Material.RED_WOOL else Material.LIME_WOOL
     }
 
     override fun getDescription(player: Player): MutableList<String>

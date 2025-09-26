@@ -18,11 +18,11 @@ class PingCommand : BaseCommand()
     {
         if (target != null)
         {
-            player.sendMessage(Chat.format(target.getPlayer().displayName + "&e's Ping: " + getPingColor(getPlayerPing(target.player)) + getPlayerPing(target.player) + "ms"))
+            player.sendMessage(Chat.format(target.getPlayer().displayName + "&e's Ping: " + getPingColor(target.player.ping) + target.player.ping + "ms"))
             return
         }
 
-        player.sendMessage(Chat.format("&eYour Ping: " + getPingColor(getPlayerPing(player)) + getPlayerPing(player) + "ms"))
+        player.sendMessage(Chat.format("&eYour Ping: " + getPingColor(player.ping) + player.ping + "ms"))
     }
 
     fun getPingColor(ping: Int): ChatColor {
@@ -32,17 +32,6 @@ class PingCommand : BaseCommand()
             ping < 300 -> ChatColor.GOLD // Average ping
             ping < 500 -> ChatColor.RED // Poor ping
             else -> ChatColor.DARK_RED // Very poor ping
-        }
-    }
-
-    fun getPlayerPing(player: Player): Int {
-        return try {
-            val handle = player.javaClass.getMethod("getHandle").invoke(player)
-            val pingField = handle.javaClass.getField("ping")
-            pingField.getInt(handle)
-        } catch (e: Exception) {
-            e.printStackTrace()
-            -1 // Return -1 if the ping couldn't be fetched
         }
     }
 

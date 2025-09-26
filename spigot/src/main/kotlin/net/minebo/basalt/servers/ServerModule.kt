@@ -39,6 +39,7 @@ object ServerModule : PluginModule
         {
             val server = UniqueServer(
                 config.getString("server.id")!!.lowercase(),
+                config.getString("server.group")!!,
                 config.getString("server.id")!!,
                 config.getString("server.id")!!,
                 arrayListOf(),

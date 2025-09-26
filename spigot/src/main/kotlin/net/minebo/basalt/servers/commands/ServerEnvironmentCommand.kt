@@ -74,6 +74,7 @@ class ServerEnvironmentCommand : BaseCommand()
         player.sendMessage(" ")
         val server = Basalt.globalServer
         player.sendMessage(Chat.format("&eName: &f" + server.displayName))
+        player.sendMessage(Chat.format("&eGroup: &f" + server.group))
         player.sendMessage(Chat.format("&eLocked: &f" + server.lockedWithRank))
         player.sendMessage(" ")
     }

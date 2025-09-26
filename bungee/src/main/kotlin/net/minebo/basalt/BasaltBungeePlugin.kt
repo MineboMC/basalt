@@ -4,6 +4,10 @@ import io.github.nosequel.data.connection.mongo.AuthenticatedMongoConnectionPool
 import io.github.nosequel.data.connection.mongo.NoAuthMongoConnectionPool
 import io.github.nosequel.data.connection.mongo.URIMongoConnectionPool
 import net.minebo.basalt.listeners.BungeeListener
+import net.minebo.basalt.motd.MotdListener
+import net.minebo.basalt.whitelist.WhitelistListener
+import net.minebo.basalt.commands.MotdCommand
+import net.minebo.basalt.commands.WhitelistCommand
 import net.md_5.bungee.api.plugin.Plugin
 import net.md_5.bungee.config.Configuration
 import net.md_5.bungee.config.ConfigurationProvider
@@ -19,6 +23,11 @@ class BasaltBungeePlugin : Plugin() {
     val config = ConfigurationProvider.getProvider(YamlConfiguration::class.java)
 
     lateinit var configuration: Configuration
+    lateinit var configFile: File
+
+    fun saveConfig() {
+        config.save(configuration, configFile)
+    }
 
     override fun onEnable() {
         instance = this
@@ -28,11 +37,11 @@ class BasaltBungeePlugin : Plugin() {
         }
 
         val file = File(dataFolder, "config.yml")
+        configFile = file
+
         if (!file.exists()) {
             file.createNewFile()
             configuration = config.load(file)
-            configuration.set("lockdown", true)
-
 
             configuration.set("mongo.host", "127.0.0.1")
             configuration.set("mongo.port", 27017)
@@ -49,6 +58,24 @@ class BasaltBungeePlugin : Plugin() {
             configuration.set("redis.username", "")
             configuration.set("redis.password", "")
 
+            // MOTD defaults
+            configuration.set("motd.normal", listOf(
+                "Welcome to the server!",
+                "Enjoy your stay."
+            ))
+            configuration.set("motd.whitelist", listOf(
+                "Server is currently whitelisted.",
+                "Please try again later."
+            ))
+
+            // Whitelist defaults
+            configuration.set("whitelist.enabled", true)
+            configuration.set("whitelist.kick-message", listOf(
+                "&cYou are not whitelisted."
+            ))
+            configuration.set("whitelist.uuids", listOf(
+                "15f0316d-84f0-404f-84ff-19fae1a0d289"
+            ))
 
             config.save(configuration, file)
         } else {
@@ -105,7 +132,15 @@ class BasaltBungeePlugin : Plugin() {
             )
         }
 
+        // Listeners already present
         proxy.pluginManager.registerListener(this, BungeeListener())
 
+        // New: Register MOTD and Whitelist listeners
+        proxy.pluginManager.registerListener(this, MotdListener())
+        proxy.pluginManager.registerListener(this, WhitelistListener())
+
+        // New: Register simple commands for MOTD and Whitelist management
+        proxy.pluginManager.registerCommand(this, WhitelistCommand())
+        proxy.pluginManager.registerCommand(this, MotdCommand())
     }
 }

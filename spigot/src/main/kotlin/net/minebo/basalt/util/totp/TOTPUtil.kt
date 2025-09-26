@@ -3,6 +3,7 @@ package net.minebo.basalt.util.totp
 import net.minebo.basalt.api.BasaltAPI
 import org.apache.commons.codec.binary.Base32
 import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 import java.security.GeneralSecurityException
 import java.security.SecureRandom
 import java.util.*
@@ -45,12 +46,19 @@ object TOTPUtil
         return BASE_32_ENCODER.encodeToString(secretKey)
     }
 
-    fun qrImageUrl(secret: String, username: String): String
-    {
-        return String.format(
-            "https://www.google.com/chart?chs=200x200&chld=M%%7C0&cht=qr&chl=otpauth://totp/%s@%s%%3Fsecret%%3D%s",
-            *arrayOf<Any>(username, URLEncoder.encode(BasaltAPI.GENERIC_NAME, "UTF-8"), secret)
+
+    fun qrImageUrl(secret: String, username: String): String {
+        val issuer = BasaltAPI.GENERIC_NAME
+        val otpauth = String.format(
+            "otpauth://totp/%s@%s?secret=%s&issuer=%s",
+            username,
+            issuer,
+            secret,
+            issuer
         )
+
+        val encoded = URLEncoder.encode(otpauth, StandardCharsets.UTF_8.toString())
+        return "https://www.google.com/chart?chs=200x200&chld=M|0&cht=qr&chl=$encoded"
     }
 
     fun generateOtpAuthUrl(keyId: String, secret: String, username: String): String

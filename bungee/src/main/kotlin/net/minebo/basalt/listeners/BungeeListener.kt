@@ -1,11 +1,9 @@
 package net.minebo.basalt.listeners
 
+import net.md_5.bungee.api.ChatColor
 import net.minebo.basalt.BasaltBungeePlugin
-import net.minebo.basalt.lockdown.LockdownManager
-import net.minebo.basalt.packets.StaffMessagePacket
 import net.minebo.basalt.service.expirable.RankGrantService
 import net.minebo.basalt.service.profiles.ProfileGameService
-import net.md_5.bungee.api.ChatColor
 import net.md_5.bungee.api.chat.TextComponent
 import net.md_5.bungee.api.event.LoginEvent
 import net.md_5.bungee.api.event.PlayerDisconnectEvent
@@ -15,9 +13,18 @@ import net.md_5.bungee.api.plugin.Listener
 import net.md_5.bungee.event.EventHandler
 import java.util.concurrent.TimeUnit
 
-//no packets actually need to send through redis because bungee has all players already stored
-//I am going to do something with redis in the future but this is just a quick solution
 class BungeeListener : Listener {
+
+    private fun sendStaffMessage(message: String) {
+        for (player in BasaltBungeePlugin.instance.proxy.players) {
+            val profile = ProfileGameService.byId(player.uniqueId) ?: continue
+            val rank = profile.getHighestGlobalRank() ?: continue
+
+            if (rank.staff) {
+                player.sendMessage(TextComponent(message))
+            }
+        }
+    }
 
     @EventHandler
     fun switch(event: ServerSwitchEvent) {
@@ -26,20 +33,17 @@ class BungeeListener : Listener {
         val playerRank = ProfileGameService.byId(player)?.getHighestGlobalRank() ?: return
         BasaltBungeePlugin.instance.proxy.scheduler.schedule(BasaltBungeePlugin.instance, {
             if (playerRank.staff && event.from != null) {
-                StaffMessagePacket("&b[S] &r" + playerRank.color + event.player.name + " &3joined &b" + event.player.server.info.name + " &3from &b" + event.from.name).action()
+                sendStaffMessage("${ChatColor.AQUA}[S] ${ChatColor.RESET}${ChatColor.translateAlternateColorCodes('&', playerRank.color)}${event.player.name} ${ChatColor.DARK_AQUA}joined ${ChatColor.AQUA}${event.player.server.info.name} ${ChatColor.DARK_AQUA}from ${ChatColor.AQUA}${event.from.name}")
             }
         }, 100L, TimeUnit.MILLISECONDS)
     }
 
     @EventHandler
-    fun handlePermissions(event: ServerConnectEvent)
-    {
+    fun handlePermissions(event: ServerConnectEvent) {
         val profile = ProfileGameService.byId(event.player.uniqueId) ?: return
 
-        for ((a, b) in profile.getPermissionsExclusivelyGlobal())
-        {
-            if (!b)
-            {
+        for ((a, b) in profile.getPermissionsExclusivelyGlobal()) {
+            if (!b) {
                 event.player.setPermission(a, true)
             }
         }
@@ -53,19 +57,18 @@ class BungeeListener : Listener {
 
         BasaltBungeePlugin.instance.proxy.scheduler.schedule(BasaltBungeePlugin.instance, {
             if (playerRank.staff) {
-                StaffMessagePacket("&b[S] &r" + playerRank.color + event.connection.name + " &3connected to the network").action()
+                sendStaffMessage("${ChatColor.AQUA}[S] ${ChatColor.RESET}${ChatColor.translateAlternateColorCodes('&', playerRank.color)}${event.connection.name} ${ChatColor.DARK_AQUA}connected to the network.")
             }
         }, 100L, TimeUnit.MILLISECONDS)
     }
 
     @EventHandler
-    fun dc(event: PlayerDisconnectEvent)
-    {
+    fun dc(event: PlayerDisconnectEvent) {
         val player = event.player
 
         val profile = ProfileGameService.byId(player.uniqueId) ?: return
 
-        //false fire
+        // false fire
         if (player.isConnected) return
 
         RankGrantService.recalculatePlayer(profile)
@@ -74,21 +77,8 @@ class BungeeListener : Listener {
 
         BasaltBungeePlugin.instance.proxy.scheduler.schedule(BasaltBungeePlugin.instance, {
             if (playerRank.staff) {
-                StaffMessagePacket("&b[S] &r" + playerRank.color + player.name + " &3left the network").action()
+                sendStaffMessage("${ChatColor.AQUA}[S] ${ChatColor.RESET}${ChatColor.translateAlternateColorCodes('&', playerRank.color)}${player.name} ${ChatColor.DARK_AQUA}left the network.")
             }
         }, 100L, TimeUnit.SECONDS)
-    }
-
-    @EventHandler
-    fun checkClearance(event: ServerConnectEvent) {
-        BasaltBungeePlugin.instance.proxy.scheduler.schedule(BasaltBungeePlugin.instance, {
-            if (LockdownManager.serverIsOnLockdown()) {
-                if (LockdownManager.hasClearance(event.player)) {
-                    StaffMessagePacket("&b✓ &a" + event.player.name + " has clearance for " + event.player.server.info.name).action()
-                } else {
-                    event.player.disconnect(TextComponent(ChatColor.translateAlternateColorCodes('&',"&cServer is on lockdown and you do not have clearance!")))
-                }
-            }
-        }, 100L, TimeUnit.MILLISECONDS)
     }
 }

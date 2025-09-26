@@ -6,6 +6,7 @@ import kotlin.collections.ArrayList
 
 data class UniqueServer(
     var id: String,
+    var group: String,
     var displayName: String,
     var queueName: String,
     var players: ArrayList<UUID>,

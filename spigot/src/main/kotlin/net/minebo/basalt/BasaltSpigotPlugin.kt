@@ -61,8 +61,6 @@ class BasaltSpigotPlugin : JavaPlugin()
         instance = this
         launchedAt = System.currentTimeMillis()
 
-        sendStartupMSG()
-
         val startMongo = System.currentTimeMillis()
 
         val enabled = config.getBoolean("mongo.enabled")
@@ -258,17 +256,6 @@ class BasaltSpigotPlugin : JavaPlugin()
 
         Chat.sendConsoleMessage(
             "&e[Queue] &fAll queues registered in &e" + System.currentTimeMillis().minus(queueStart) + "ms"
-        )
-    }
-
-    fun sendStartupMSG()
-    {
-        Chat.sendMultiConsoleMessage(
-            arrayOf(
-                "&7&m--------------------------------",
-                "&b&lBasalt Network Core &7- &3Forked from 98ping's alchemist!",
-                "&7&m--------------------------------",
-            )
         )
     }
 

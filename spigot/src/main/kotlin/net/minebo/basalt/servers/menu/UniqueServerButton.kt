@@ -23,10 +23,16 @@ class UniqueServerButton(var server: UniqueServer) : Button()
         val desc = arrayListOf<String>()
         desc.add(Chat.format("&6&m-------------------------------------"))
         desc.add(Chat.format("&eId: &f" + server.id))
+        desc.add(Chat.format("&eGroup: &f" + server.group))
         desc.add(Chat.format("&eDisplayName: &f" + server.displayName))
         desc.add(Chat.format("&eBungee Id: &f" + server.bungeeName))
         desc.add(Chat.format("&eQueue Server Name: &f" + server.queueName))
         desc.add(Chat.format("&6&m-------------------------------------"))
+        if(server.online) {
+            desc.add(Chat.format("&eOnline Players: &f" + server.players.size))
+            desc.add(Chat.format("&ePlayer Slots: &f" + server.slots))
+            desc.add(Chat.format("&6&m-------------------------------------"))
+        }
         desc.add(Chat.format("&eRam: &f" + server.ramAllocated + "mb"))
         desc.add(Chat.format("&eStatus: &f" + if (server.online) "&aOnline" else "&cOffline"))
         desc.add(
