@@ -111,9 +111,10 @@ class RankEditorMenu(
 
     class RankButton(val player: Player, val rank: Rank) : Button()
     {
-        override fun getMaterial(player: Player): Material
-        {
-            return Material.INK_SAC
+        override fun getMaterial(player: Player): Material {
+            val woolColor = rank.woolColor ?: return Material.WHITE_DYE
+            val dyeColor = BasaltAPI.getWoolColor(woolColor)
+            return BasaltAPI.getDyeFromColor(dyeColor).type
         }
 
         override fun getDescription(player: Player): MutableList<String>

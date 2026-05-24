@@ -1,6 +1,6 @@
-package net.minebo.basalt.whitelist
+package net.minebo.basalt.bungee.whitelist
 
-import net.minebo.basalt.BasaltBungeePlugin
+import net.minebo.basalt.bungee.BasaltBungeePlugin
 import java.util.UUID
 
 object WhitelistManager {

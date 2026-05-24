@@ -1,7 +1,7 @@
-package net.minebo.basalt.listeners
+package net.minebo.basalt.bungee.listeners
 
 import net.md_5.bungee.api.ChatColor
-import net.minebo.basalt.BasaltBungeePlugin
+import net.minebo.basalt.bungee.BasaltBungeePlugin
 import net.minebo.basalt.service.expirable.RankGrantService
 import net.minebo.basalt.service.profiles.ProfileGameService
 import net.md_5.bungee.api.chat.TextComponent
@@ -12,6 +12,7 @@ import net.md_5.bungee.api.event.ServerSwitchEvent
 import net.md_5.bungee.api.plugin.Listener
 import net.md_5.bungee.event.EventHandler
 import java.util.concurrent.TimeUnit
+import kotlin.collections.iterator
 
 class BungeeListener : Listener {
 

@@ -1,4 +1,4 @@
 name: Basalt
 version: "1.2"
-main: net.minebo.basalt.BasaltBungeePlugin
+main: net.minebo.basalt.bungee.BasaltBungeePlugin
 authors: ["98ping", "Ian Rich"]

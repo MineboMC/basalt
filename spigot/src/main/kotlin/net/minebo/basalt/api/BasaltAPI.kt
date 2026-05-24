@@ -8,94 +8,71 @@ import net.minebo.basalt.service.profiles.ProfileGameService
 import net.minebo.basalt.service.ranks.RankService
 import org.bukkit.Bukkit
 import org.bukkit.DyeColor
+import org.bukkit.Material
 import org.bukkit.entity.Player
+import org.bukkit.inventory.ItemStack
 import java.util.*
 import java.util.concurrent.CompletableFuture
 
-
-object BasaltAPI
-{
+object BasaltAPI {
 
     var SERVER_NAME = BasaltSpigotPlugin.instance.config.getString("details.ip")
     var GENERIC_NAME = BasaltSpigotPlugin.instance.config.getString("details.genericName")
     var SC_FORMAT = BasaltSpigotPlugin.instance.config.getString("channels.staffChat")
     var AC_FORMAT = BasaltSpigotPlugin.instance.config.getString("channels.adminChat")
-
     var CONSOLE_COLOR = BasaltSpigotPlugin.instance.config.getString("consoleColor") ?: "&c&l"
 
-    fun getRankDisplay(uuid: UUID): String
-    {
+    fun getRankDisplay(uuid: UUID): String {
         var finalString = "${CONSOLE_COLOR}Console"
-
         val profile = quickFindProfile(uuid).get()
-
-        if (profile != null)
-        {
+        if (profile != null) {
             finalString = profile.getCurrentRank().color + profile.username
         }
-
         return finalString
     }
 
-
-    fun getPlayerRankString(uuid: UUID): String
-    {
+    fun getPlayerRankString(uuid: UUID): String {
         val current = RankService.FALLBACK_RANK
-
         val profile = syncFindProfile(uuid) ?: return (current.color + current.displayName)
         val rank = profile.getCurrentRank()
-
         return rank.color + rank.displayName
     }
 
-    fun getRankWeight(uuid: UUID): Int
-    {
+    fun getRankWeight(uuid: UUID): Int {
         val profile = syncFindProfile(uuid) ?: return 1
         val currentRank = profile.getCurrentRank()
-
         return currentRank.weight
     }
 
-    fun getRankWithPrefix(uuid: UUID): String
-    {
+    fun getRankWithPrefix(uuid: UUID): String {
         var finalString = "${CONSOLE_COLOR}Console"
-
         val profile = quickFindProfile(uuid).get()
-
-        if (profile != null)
-        {
+        if (profile != null) {
             val rank = profile.getCurrentRank()
             finalString = rank.prefix + rank.color + profile.username
         }
-
         return finalString
     }
 
-    fun quickFindProfile(uuid: UUID): CompletableFuture<GameProfile?>
-    {
+    fun quickFindProfile(uuid: UUID): CompletableFuture<GameProfile?> {
         return CompletableFuture.supplyAsync { ProfileGameService.byId(uuid) }
     }
 
-    fun syncFindProfile(uuid: UUID): GameProfile?
-    {
+    fun syncFindProfile(uuid: UUID): GameProfile? {
         return ProfileGameService.byId(uuid)
     }
 
-    fun findRank(uuid: UUID): Rank
-    {
+    fun findRank(uuid: UUID): Rank {
         val profile = ProfileGameService.byId(uuid) ?: return RankService.FALLBACK_RANK
-
         return profile.getCurrentRank()
     }
 
-    fun supplyColoredNames(): CompletableFuture<List<Player>>
-    {
+    fun supplyColoredNames(): CompletableFuture<List<Player>> {
         return CompletableFuture.supplyAsync {
             Bukkit.getOnlinePlayers()
                 .filter { !it.hasMetadata("vanish") }
-                .sortedBy {
-                    AccessiblePermissionHandler.findRankWeight(it)
-                }.reversed()
+                .sortedBy { AccessiblePermissionHandler.findRankWeight(it) }
+                .reversed()
         }
     }
 
@@ -109,7 +86,7 @@ object BasaltAPI
             5 -> DyeColor.LIME
             6 -> DyeColor.PINK
             7 -> DyeColor.GRAY
-            8 -> DyeColor.LIGHT_GRAY // was "SILVER"
+            8 -> DyeColor.LIGHT_GRAY
             9 -> DyeColor.CYAN
             10 -> DyeColor.PURPLE
             11 -> DyeColor.BLUE
@@ -121,8 +98,14 @@ object BasaltAPI
         }
     }
 
-    fun getWoolColor(color: String): DyeColor
-    {
+    /** Safe version - handles null */
+    fun getWoolColor(color: Short?): DyeColor {
+        return getWoolColor(color ?: 0)
+    }
+
+    fun getWoolColor(color: String?): DyeColor {
+        if (color.isNullOrBlank()) return DyeColor.WHITE
+
         return when {
             color.contains("&1") || color.contains("&9") -> DyeColor.BLUE
             color.contains("&2") -> DyeColor.GREEN
@@ -136,12 +119,12 @@ object BasaltAPI
             color.contains("&b") -> DyeColor.LIGHT_BLUE
             color.contains("&d") -> DyeColor.PINK
             color.contains("&e") -> DyeColor.YELLOW
+            color.contains("&f") -> DyeColor.WHITE
             else -> DyeColor.WHITE
         }
     }
 
-    fun getWoolColorStrict(color: String): DyeColor?
-    {
+    fun getWoolColorStrict(color: String): DyeColor? {
         return when {
             color.contains("&1") || color.contains("&9") -> DyeColor.BLUE
             color.contains("&2") -> DyeColor.GREEN
@@ -160,4 +143,27 @@ object BasaltAPI
         }
     }
 
+    private val dyeMaterialMap = mapOf(
+        DyeColor.WHITE to Material.WHITE_DYE,
+        DyeColor.ORANGE to Material.ORANGE_DYE,
+        DyeColor.MAGENTA to Material.MAGENTA_DYE,
+        DyeColor.LIGHT_BLUE to Material.LIGHT_BLUE_DYE,
+        DyeColor.YELLOW to Material.YELLOW_DYE,
+        DyeColor.LIME to Material.LIME_DYE,
+        DyeColor.PINK to Material.PINK_DYE,
+        DyeColor.GRAY to Material.GRAY_DYE,
+        DyeColor.LIGHT_GRAY to Material.LIGHT_GRAY_DYE,
+        DyeColor.CYAN to Material.CYAN_DYE,
+        DyeColor.PURPLE to Material.PURPLE_DYE,
+        DyeColor.BLUE to Material.BLUE_DYE,
+        DyeColor.BROWN to Material.BROWN_DYE,
+        DyeColor.GREEN to Material.GREEN_DYE,
+        DyeColor.RED to Material.RED_DYE,
+        DyeColor.BLACK to Material.BLACK_DYE
+    )
+
+    fun getDyeFromColor(color: DyeColor?): ItemStack {
+        val safeColor = color ?: DyeColor.WHITE
+        return ItemStack(dyeMaterialMap[safeColor] ?: Material.WHITE_DYE, 1)
+    }
 }

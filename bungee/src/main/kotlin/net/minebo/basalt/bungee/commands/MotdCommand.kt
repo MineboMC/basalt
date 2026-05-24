@@ -1,8 +1,8 @@
-package net.minebo.basalt.commands
+package net.minebo.basalt.bungee.commands
 
-import net.minebo.basalt.motd.MotdManager
-import net.minebo.basalt.motd.MotdType
-import net.minebo.basalt.util.ColorUtil
+import net.minebo.basalt.bungee.motd.MotdManager
+import net.minebo.basalt.bungee.motd.MotdType
+import net.minebo.basalt.bungee.util.ColorUtil
 import net.md_5.bungee.api.ChatColor
 import net.md_5.bungee.api.chat.TextComponent
 import net.md_5.bungee.api.CommandSender

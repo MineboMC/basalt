@@ -1,12 +1,12 @@
-package net.minebo.basalt.commands
+package net.minebo.basalt.bungee.commands
 
 import com.google.gson.JsonParser
-import net.minebo.basalt.whitelist.WhitelistManager
+import net.minebo.basalt.bungee.whitelist.WhitelistManager
 import net.md_5.bungee.api.CommandSender
 import net.md_5.bungee.api.ChatColor
 import net.md_5.bungee.api.ProxyServer
 import net.md_5.bungee.api.plugin.Command
-import net.minebo.basalt.api.BasaltAPI
+import net.minebo.basalt.bungee.api.BungeeAPI
 import java.net.HttpURLConnection
 import java.net.URL
 import java.util.UUID
@@ -51,7 +51,7 @@ class WhitelistCommand : Command("whitelist", "", "wl") {
                 } else {
                     sender.sendMessage("${ChatColor.YELLOW}Whitelisted players (${all.size}):")
                     all.forEach { uuid ->
-                        val profile = BasaltAPI.quickFindProfile(uuid)
+                        val profile = BungeeAPI.quickFindProfile(uuid)
                         val name = profile.get()?.username ?: uuid.toString()
                         sender.sendMessage("${ChatColor.GRAY} - ${ChatColor.WHITE}$name")
                     }

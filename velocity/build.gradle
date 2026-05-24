@@ -2,4 +2,11 @@ dependencies {
     implementation project(":commons")
 
     compileOnly 'com.velocitypowered:velocity-api:3.1.1'
+
+    implementation("org.spongepowered:configurate-yaml:4.1.2")
+    implementation("org.spongepowered:configurate-extra-kotlin:4.1.2")
+}
+
+tasks.shadowJar {
+    relocate("org.spongepowered.configurate", "net.minebo.basalt.libs.configurate")
 }

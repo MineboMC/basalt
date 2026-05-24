@@ -1,10 +1,9 @@
-package net.minebo.basalt.motd
+package net.minebo.basalt.bungee.motd
 
 import net.md_5.bungee.api.ServerPing
 import net.md_5.bungee.api.chat.BaseComponent
-import net.minebo.basalt.whitelist.WhitelistManager
+import net.minebo.basalt.bungee.whitelist.WhitelistManager
 import net.md_5.bungee.api.chat.TextComponent
-import net.md_5.bungee.api.connection.Server
 import net.md_5.bungee.api.event.ProxyPingEvent
 import net.md_5.bungee.api.plugin.Listener
 import net.md_5.bungee.event.EventHandler

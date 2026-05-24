@@ -1,7 +1,7 @@
-package net.minebo.basalt.motd
+package net.minebo.basalt.bungee.motd
 
-import net.minebo.basalt.BasaltBungeePlugin
-import net.minebo.basalt.util.ColorUtil
+import net.minebo.basalt.bungee.BasaltBungeePlugin
+import net.minebo.basalt.bungee.util.ColorUtil
 
 object MotdManager {
 

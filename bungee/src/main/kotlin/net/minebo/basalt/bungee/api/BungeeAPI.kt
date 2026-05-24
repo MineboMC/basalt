@@ -1,4 +1,4 @@
-package net.minebo.basalt.api
+package net.minebo.basalt.bungee.api
 
 import net.minebo.basalt.models.profile.GameProfile
 import net.minebo.basalt.models.ranks.Rank
@@ -8,7 +8,7 @@ import java.util.*
 import java.util.concurrent.CompletableFuture
 
 
-object BasaltAPI
+object BungeeAPI
 {
 
     fun getPlayerRankString(uuid: UUID): String

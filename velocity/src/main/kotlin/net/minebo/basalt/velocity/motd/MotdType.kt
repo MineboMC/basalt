@@ -1,4 +1,4 @@
-package net.minebo.basalt.motd
+package net.minebo.basalt.velocity.motd
 
 enum class MotdType {
     NORMAL,

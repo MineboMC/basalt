@@ -1,4 +1,4 @@
-package net.minebo.basalt.util
+package net.minebo.basalt.bungee.util
 
 import net.md_5.bungee.api.ChatColor
 

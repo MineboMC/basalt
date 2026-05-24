@@ -1,17 +1,18 @@
-package net.minebo.basalt
+package net.minebo.basalt.bungee
 
 import io.github.nosequel.data.connection.mongo.AuthenticatedMongoConnectionPool
 import io.github.nosequel.data.connection.mongo.NoAuthMongoConnectionPool
 import io.github.nosequel.data.connection.mongo.URIMongoConnectionPool
-import net.minebo.basalt.listeners.BungeeListener
-import net.minebo.basalt.motd.MotdListener
-import net.minebo.basalt.whitelist.WhitelistListener
-import net.minebo.basalt.commands.MotdCommand
-import net.minebo.basalt.commands.WhitelistCommand
+import net.minebo.basalt.bungee.listeners.BungeeListener
+import net.minebo.basalt.bungee.motd.MotdListener
+import net.minebo.basalt.bungee.whitelist.WhitelistListener
+import net.minebo.basalt.bungee.commands.MotdCommand
+import net.minebo.basalt.bungee.commands.WhitelistCommand
 import net.md_5.bungee.api.plugin.Plugin
 import net.md_5.bungee.config.Configuration
 import net.md_5.bungee.config.ConfigurationProvider
 import net.md_5.bungee.config.YamlConfiguration
+import net.minebo.basalt.Basalt
 import java.io.File
 
 class BasaltBungeePlugin : Plugin() {

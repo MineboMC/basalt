@@ -1,6 +1,6 @@
-package net.minebo.basalt.whitelist
+package net.minebo.basalt.bungee.whitelist
 
-import net.minebo.basalt.util.ColorUtil
+import net.minebo.basalt.bungee.util.ColorUtil
 import net.md_5.bungee.api.chat.TextComponent
 import net.md_5.bungee.api.event.LoginEvent
 import net.md_5.bungee.api.plugin.Listener

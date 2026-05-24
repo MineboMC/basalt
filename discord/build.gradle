@@ -9,8 +9,10 @@ dependencies {
     implementation("net.dv8tion:JDA:5.0.0-beta.20")
 
     // configurations
-    implementation("ltd.matrixstudios:amber:1.1.0")
-    implementation("com.github.Carleslc.Simple-YAML:Simple-Yaml:1.8.4")
+    implementation("me.carleslc:Simple-Yaml:1.8.4")
+
+    //local files
+    implementation fileTree(include: ['amber-1.1.0.jar'], dir: 'lib')
 }
 
 jar {

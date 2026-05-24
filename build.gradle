@@ -1,9 +1,13 @@
 plugins {
     id 'java'
-    id 'org.jetbrains.kotlin.jvm' version '2.1.20-Beta1'
-    id 'org.jetbrains.kotlin.kapt' version '2.1.20-Beta1'
-    id "com.github.johnrengelman.shadow" version "7.1.2"
+    id 'org.jetbrains.kotlin.jvm' version '2.1.21'
+    id 'org.jetbrains.kotlin.kapt' version '2.1.21'
+    id "com.github.johnrengelman.shadow" version "8.1.1"
     id 'maven-publish'
+}
+
+kotlin {
+    jvmToolchain(21)
 }
 
 allprojects {
@@ -42,12 +46,11 @@ subprojects {
         implementation 'co.aikar:acf-paper:0.5.1-SNAPSHOT'
         implementation 'net.kyori:adventure-platform-bukkit:4.3.0'
         implementation 'club.minnced:discord-webhooks:0.8.2'
-        implementation 'com.github.Carleslc.Simple-YAML:Simple-Yaml:1.8.4'
+        implementation 'me.carleslc:Simple-Yaml:1.8.4'
 
         // Discord
         implementation 'net.dv8tion:JDA:5.0.0-beta.20'
-        implementation 'ltd.matrixstudios:amber:1.1.0'
-        implementation 'com.github.Carleslc.Simple-YAML:Simple-Yaml:1.8.4'
+        implementation 'me.carleslc:Simple-Yaml:1.8.4'
 
         // Apache
         implementation 'org.apache.maven:maven-artifact:3.0.3'
@@ -57,13 +60,8 @@ subprojects {
         compileOnly files("../libraries/PlaceholderAPI-2.11.6.jar")
     }
 
-    java {
-        toolchain.languageVersion.set(JavaLanguageVersion.of(21))
-    }
-
     tasks.named('compileKotlin') {
         kotlinOptions.javaParameters = true
-        kotlinOptions.jvmTarget = "21"
     }
 
     publishing {
@@ -76,6 +74,8 @@ subprojects {
 }
 
 tasks.named('shadowJar') {
+    duplicatesStrategy = DuplicatesStrategy.FAIL
+
     archiveClassifier.set('') // Remove the 'all' classifier
     mergeServiceFiles()
 
